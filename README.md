@@ -1,4 +1,4 @@
-Name: Dhavalkumar Patel
+Name: Dhavalkumar Patel <br/>
 Email Id: patel.dha@husky.neu.edu
 
 I am currently a Graduate student at Northeastern University, pursuing Masters in Computer Science. I have a passion for programming and enjoy solving problems through new approaches and ideas and turning them into practice.
@@ -6,6 +6,6 @@ I have a industry work experience of almost four years as a Software Engineer on
 
 This repository is for storing develiverables (Assignments & Project) of CS 5610 - Web Development course.
 
-Link to Web Application hosted on Heroku: https://patel-dhavalkumar-webdev.herokuapp.com
-Link to project: https://patel-dhavalkumar-webdev.herokuapp.com/project/index.html
-Link to Assignments: https://patel-dhavalkumar-webdev.herokuapp.com/assignment/index.html
+Link to Web Application hosted on Heroku: https://patel-dhavalkumar-webdev.herokuapp.com <br/>
+Link to project: https://patel-dhavalkumar-webdev.herokuapp.com/project/index.html <br/>
+Link to Assignments: https://patel-dhavalkumar-webdev.herokuapp.com/assignment/index.html <br/>

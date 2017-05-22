@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Editor</title>
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="widget-list.html" class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand" href="">
+                        Image Editor
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="widget-list.html" class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid wd-widget-edit">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="facebook"
+           value="Image Name"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="facebook"
+           value="Some Text"
+           id="text"/>
+
+    <label for="url">URL</label>
+    <input class="form-control"
+           placeholder="facebook"
+           value="https://i.kinja-img.com/gawker-media/image/upload/s--JYQyMyfT--/c_scale,fl_progressive,q_80,w_800/hkvwpuiqdgtn4ntb2q7z.png"
+           id="url"/>
+
+    <label for="width">Width</label>
+    <input class="form-control"
+           placeholder="facebook"
+           value="100%"
+           id="width"/>
+
+    <label for="file">Upload</label>
+    <input id="file" multiple type="file" class="form-control"/>
+
+    <a href=""
+       class="btn btn-block btn-success">Upload Image</a>
+
+    <a href="widget-list.html"
+       class="btn btn-block btn-danger">Delete</a>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="../user/profile.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

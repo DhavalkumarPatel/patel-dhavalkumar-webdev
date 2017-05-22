@@ -1,25 +1,17 @@
-/**
- * Created by Dhaval Patel on 5/14/2017.
- */
-(function(){ // IIFE = Immediately Invoked Function Expression
+(function(){ // IIFE = Inmediately Invoked Function Expression
     angular
         .module("BlogApp", [])
         .controller("BlogPostListController", BlogPostListController);
-
+    
     function BlogPostListController($scope, $http) {
-        $scope.post = {title: 'Enter title here.', body: 'Enter body here.'}
+        $scope.hello = 'hello world !!!!';
+        $scope.post = {title: 'this is the default title', body: 'this is the body from the controller'}
         $scope.posts = [];
 
         function init() {
             findBlogPosts();
         }
         init();
-
-        // event handlers
-        $scope.deletePost = deletePost;
-        $scope.addPost = addPost;
-        $scope.selectPost = selectPost;
-        $scope.updatePost = updatePost;
 
         function findBlogPosts() {
             $http.get('/api/post')
@@ -28,11 +20,19 @@
                 });
         }
 
-        function deletePost(index) {
-            // $scope.posts.splice(index, 1);
-            $http
-                .delete('/api/post/' + index)
-                .then(findBlogPosts);
+        // event handlers
+        $scope.deletePost = deletePost;
+        $scope.addPost = addPost;
+        $scope.selectPost = selectPost;
+        $scope.updatePost = updatePost;
+
+        function updatePost(post) {
+            $scope.posts[$scope.index] = angular.copy(post);
+        }
+
+        function selectPost(index) {
+            $scope.post = angular.copy($scope.posts[index]);
+            $scope.index = index;
         }
 
         function addPost(post) {
@@ -44,14 +44,12 @@
             $scope.posts.push(newPost);
             console.log($scope.posts);
         }
-
-        function selectPost(index) {
-            $scope.post = angular.copy($scope.posts[index]);
-            $scope.index = index;
-        }
-
-        function updatePost(post) {
-            $scope.posts[$scope.index] = angular.copy(post);
+        
+        function deletePost(index) {
+            // $scope.posts.splice(index, 1);
+            $http
+                .delete('/api/post/' + index)
+                .then(findBlogPosts);
         }
     }
 })();

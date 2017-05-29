@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Widgets
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-repeat="widget in model.widgets" class="wd-widget">
+        <div class="wd-widget-toolbar">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        <div ng-include="model.widgetUrl(widget)"></div>
+    </div>
+</div>
+
+<!-- This footer is different then common footer (eye & play buttons)-->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a class="navbar-link">
+                            <span class="glyphicon glyphicon-play"> </span>
+                        </a>
+                        <a class="navbar-link">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                    </p>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/user/{{model.userId}}"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

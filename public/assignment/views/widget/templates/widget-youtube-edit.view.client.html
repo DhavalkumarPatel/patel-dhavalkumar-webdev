@@ -1,0 +1,66 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Video Editor
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a ng-click="model.updateWidget(model.widget)"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid wd-widget-edit">
+
+    <label for="name">Name</label>
+    <input ng-model="model.widget.name"
+           class="form-control"
+           placeholder="facebook"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input ng-model="model.widget.text"
+           class="form-control"
+           placeholder="facebook"
+           id="text"/>
+
+    <label for="url">URL</label>
+    <input ng-model="model.widget.url"
+           class="form-control"
+           placeholder="facebook"
+           id="url"/>
+
+    <label for="width">Width</label>
+    <input ng-model="model.widget.width"
+           class="form-control"
+           placeholder="facebook"
+           id="width"/>
+
+    <a ng-click="model.updateWidget(model.widget)"
+       class="btn btn-block btn-success">
+        Update
+    </a>
+
+    <a ng-click="model.deleteWidget(model.widgetId)"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

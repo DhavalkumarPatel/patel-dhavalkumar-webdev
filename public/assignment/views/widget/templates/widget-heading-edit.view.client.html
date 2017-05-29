@@ -1,0 +1,65 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Heading Editor
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a ng-click="model.updateWidget(model.widget)"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid wd-widget-edit">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           ng-model="model.widget.name"
+           placeholder="facebook"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           ng-model="model.widget.text"
+           placeholder="facebook"
+           id="text"/>
+
+    <label for="size">Size</label>
+    <select  ng-model="model.widget.size"
+             id="size"
+             class="form-control">
+        <option value="1">1 (X-Large)</option>
+        <option value="2">2 (Larger)</option>
+        <option value="3">3 (Large)</option>
+        <option value="4">4 (Medium)</option>
+        <option value="5">5 (Small)</option>
+        <option value="6">6 (Smallest)</option>
+    </select>
+
+    <a ng-click="model.updateWidget(model.widget)"
+       class="btn btn-block btn-success">
+        Update
+    </a>
+
+    <a ng-click="model.deleteWidget(model.widgetId)"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

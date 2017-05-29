@@ -1,0 +1,81 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 hidden-xs">
+                <div class="navbar-header">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/user/{{model.userId}}/website"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Websites
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/user/{{model.userId}}/website/new"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left visible-xs">
+                        <a href="#!/user/{{model.userId}}/website"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Edit Website
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a ng-click="model.updateWebsite(model.website)"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4 hidden-xs">
+            <div ng-include="'views/website/templates/website-list-common.view.client.html'">
+
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            <label for="name">Website Name</label>
+            <input class="form-control"
+                   ng-model="model.website.name"
+                   placeholder="facebook"
+                   id="name"/>
+
+            <label for="description">Website Description</label>
+            <textarea id="description"
+                      rows="5"
+                      ng-model="model.website.description"
+                      placeholder="So big it is its own country"
+                      class="form-control"></textarea>
+
+            <a ng-click="model.updateWebsite(model.website)"
+               class="btn btn-block btn-success">
+                Update
+            </a>
+
+            <a ng-click="model.deleteWebsite(model.websiteId)"
+               class="btn btn-block btn-danger">
+                Delete
+            </a>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

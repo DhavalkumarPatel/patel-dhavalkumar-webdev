@@ -20,6 +20,7 @@
         function updateUser(user) {
             userService.updateUser(model.userId, user);
             model.user = userService.findUserById(model.userId);
+            model.message = 'Profile updated successfully.';
         }
     }
 })();

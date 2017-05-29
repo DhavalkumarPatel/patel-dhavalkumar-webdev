@@ -26,7 +26,7 @@
         }
 
         function deleteWebsite(websiteId) {
-            websiteService.deleteWidget(websiteId);
+            websiteService.deleteWebsite(websiteId);
             $location.url('/user/'+model.userId+'/website');
         }
     }

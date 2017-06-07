@@ -74,8 +74,6 @@ function deleteWidget(req, res) {
     var widgetId = req.params.widgetId;
 
     var wDel = -1;
-
-    console.log(widgets);
     for(var w in widgets) {
         if(widgets[w]._id === widgetId) {
             wDel = w;
@@ -92,7 +90,6 @@ function deleteWidget(req, res) {
             }
         }
         widgets.splice(wDel, 1);
-        console.log(widgets);
         res.sendStatus(200);
         return;
     }

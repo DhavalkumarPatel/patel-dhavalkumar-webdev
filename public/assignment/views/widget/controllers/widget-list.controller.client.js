@@ -14,13 +14,19 @@
         model.pageId = $routeParams['pageId'];
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+            widgetService
+                .findWidgetsByPageId(model.pageId)
+                .then(renderWidgets);
         }
         init();
 
         model.trust = trust;
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.widgetUrl = widgetUrl;
+
+        function renderWidgets(widgets) {
+            model.widgets = widgets;
+        }
 
         function widgetUrl(widget) {
             var url = 'views/widget/templates/widget-'+widget.widgetType.toLowerCase()+'.view.client.html';

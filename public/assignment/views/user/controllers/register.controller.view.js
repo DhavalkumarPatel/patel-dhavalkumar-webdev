@@ -21,18 +21,24 @@
                 return;
             }
 
-            var found = userService.findUserByUsername(username);
-            
-            if(found !== null) {
-                model.error = "sorry, Username already exists.";
-            } else {
-                var newUser = {
-                    username: username,
-                    password: password
-                };
-                newUser = userService.createUser(newUser);
-                $location.url('/user/' + newUser._id);
-            }
+            userService
+                .findUserByUsername(username)
+                .then(
+                    function () {
+                        model.error = "Sorry, Username already exists.";
+                    },
+                    function () {
+                        var newUser = {
+                            username: username,
+                            password: password
+                        };
+                        return userService
+                            .createUser(newUser);
+                    }
+                )
+                .then(function (user) {
+                    $location.url('/user/' + user._id);
+                });
         }
     }
 })();

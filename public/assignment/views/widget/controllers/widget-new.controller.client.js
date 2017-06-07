@@ -13,45 +13,46 @@
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
-        model.createHeaderWidget = createHeaderWidget;
-        model.createImageWidget = createImageWidget;
-        model.createYoutubeWidget = createYoutubeWidget;
+        model.createWidget = createWidget;
 
-        function createHeaderWidget() {
-            var newHeader = {
-                name: "default header name",
-                widgetType: "HEADING",
-                size: "2",
-                text: "default header text"};
+        var newHeader = {
+            name: "default header name",
+            widgetType: "HEADING",
+            size: "2",
+            text: "default header text"};
 
-            newHeader = widgetService.createWidget(model.pageId, newHeader) ;
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+newHeader._id);
-        }
+        var newImage = {
+            widgetType: "IMAGE",
+            name: "default image name",
+            text: "default image text",
+            width: "100%",
+            url: "http://lorempixel.com/400/200/"
+        };
 
-        function createImageWidget() {
-            var newHeader = {
-                widgetType: "IMAGE",
-                name: "default image name",
-                text: "default image text",
-                width: "100%",
-                url: "http://lorempixel.com/400/200/"
-            };
+        var newYoutube = {
+            widgetType: "YOUTUBE",
+            name: "default youtube name",
+            text: "default youtube text",
+            width: "100%",
+            url: "https://youtu.be/AM2Ivdi9c4E"
+        };
 
-            newHeader = widgetService.createWidget(model.pageId, newHeader) ;
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+newHeader._id);
-        }
+        function createWidget(widgetType) {
+            var newWidget = {};
+            if (widgetType === 'HEADING') {
+                newWidget = newHeader;
+            } else if (widgetType === 'IMAGE') {
+                newWidget = newImage;
+            } else if (widgetType === 'YOUTUBE') {
+                newWidget = newYoutube;
+            }
+            newWidget.pageId = model.pageId;
 
-        function createYoutubeWidget() {
-            var newHeader = {
-                widgetType: "YOUTUBE",
-                name: "default youtube name",
-                text: "default youtube text",
-                width: "100%",
-                url: "https://youtu.be/AM2Ivdi9c4E"
-            };
-
-            newHeader = widgetService.createWidget(model.pageId, newHeader) ;
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+newHeader._id);
+            widgetService
+                .createWidget(newWidget)
+                .then(function (newWidget) {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+newWidget._id);
+                });
         }
     }
 })();

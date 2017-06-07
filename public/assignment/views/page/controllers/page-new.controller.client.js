@@ -12,11 +12,17 @@
         model.websiteId = $routeParams['websiteId'];
 
         function init() {
-            model.pages = pageService.findAllPagesByWebsiteId(model.websiteId);
+            pageService
+                .findAllPagesByWebsiteId(model.websiteId)
+                .then(renderPages);
         }
         init();
 
         model.createPage = createPage;
+
+        function renderPages(pages) {
+            model.pages = pages;
+        }
 
         function createPage(page) {
 
@@ -36,8 +42,12 @@
             }
 
             page.websiteId = model.websiteId;
-            pageService.createPage(page);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
+
+            pageService
+                .createPage(page)
+                .then(function (page) {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
+                });
         }
     }
 })();

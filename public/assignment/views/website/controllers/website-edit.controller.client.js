@@ -12,22 +12,41 @@
         model.websiteId = $routeParams.websiteId;
 
         function init() {
-            model.websites = websiteService.findAllWebsitesForUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.websiteId);
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(renderWebsites);
+
+            websiteService
+                .findWebsiteById(model.websiteId)
+                .then(renderWebsite);
         }
         init();
 
         model.updateWebsite = updateWebsite;
         model.deleteWebsite = deleteWebsite;
 
+        function renderWebsites(websites) {
+            model.websites = websites;
+        }
+
+        function renderWebsite(website) {
+            model.website = website;
+        }
+
         function updateWebsite(website) {
-            websiteService.updateWebsite(model.websiteId, website);
-            $location.url('/user/'+model.userId+'/website');
+            websiteService
+                .updateWebsite(model.websiteId, website)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
 
         function deleteWebsite(websiteId) {
-            websiteService.deleteWebsite(websiteId);
-            $location.url('/user/'+model.userId+'/website');
+            websiteService
+                .deleteWebsite(websiteId)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
     }
 })();

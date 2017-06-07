@@ -72,14 +72,33 @@ function updateWidget(req, res) {
 
 function deleteWidget(req, res) {
     var widgetId = req.params.widgetId;
+
+    var wDel = -1;
+
+    console.log(widgets);
     for(var w in widgets) {
         if(widgets[w]._id === widgetId) {
-            widgets.splice(w, 1);
-            res.sendStatus(200);
-            return;
+            wDel = w;
+            break;
         }
     }
-    res.sendStatus(404);
+
+    if(wDel !== -1) {
+        for(var w in widgets) {
+            if(widgets[w].pageId === widgets[wDel].pageId) {
+                if(widgets[w].index > widgets[wDel].index) {
+                    widgets[w].index = widgets[w].index - 1;
+                }
+            }
+        }
+        widgets.splice(wDel, 1);
+        console.log(widgets);
+        res.sendStatus(200);
+        return;
+    }
+    else {
+        res.sendStatus(404);
+    }
 }
 
 function uploadImage(req, res) {

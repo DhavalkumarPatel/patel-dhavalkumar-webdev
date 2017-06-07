@@ -10,7 +10,8 @@
             findWidgetsByPageId: findWidgetsByPageId,
             findWidgetById: findWidgetById,
             updateWidget : updateWidget,
-            deleteWidget : deleteWidget
+            deleteWidget : deleteWidget,
+            sortWidget : sortWidget
         };
         return api;
 
@@ -49,6 +50,14 @@
         function deleteWidget(widgetId) {
             var url =  "/api/assignment/widget/" + widgetId;
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function sortWidget (pageId, initial, final) {
+            var url = "/api/assignment/page/" + pageId + "/widget?initial="+initial+"&final="+final;
+            return $http.put(url, {"pageId": pageId})
                 .then(function (response) {
                     return response.data;
                 });

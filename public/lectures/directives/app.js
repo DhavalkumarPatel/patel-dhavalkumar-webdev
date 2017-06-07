@@ -7,7 +7,12 @@
     function wdDraggable() {
 
         function linkFunction(scope, element) {
-            $(element).sortable();
+            $(element).sortable({
+                update: function( event, ui ) {
+                    var index = $('li', $(ui.item).parent()).index(ui.item);
+                    console.log(index);
+                }
+            });
         }
 
         return {

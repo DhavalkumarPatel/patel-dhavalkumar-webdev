@@ -39,6 +39,12 @@ body {
     color: #ffffff;
 }
 
+ul
+{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
 .wd-widget {
     margin: 15px;
 }

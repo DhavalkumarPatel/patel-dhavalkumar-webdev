@@ -1,0 +1,87 @@
+a.form-control,
+input.form-control,
+textarea.form-control,
+select.form-control,
+button.form-control{
+    margin-bottom: 5px;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+    .wd-margin-sx {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.navbar-default {
+    background-color: #4f4f4f;
+    border-color: #4f4f4f;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.container-fluid .navbar-header {
+    width: 100%;
+}
+
+.navbar-default .navbar-link {
+    color: white;
+}
+
+.navbar.navbar-default a {
+    color: #ffffff;
+}
+
+ul
+{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.wd-widget {
+    margin: 15px;
+}
+
+.wd-widget-edit {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.wd-widget > img {
+    width: 100%;
+}
+
+.wd-widget > .wd-widget-toolbar {
+    position: absolute;
+    right: 15px;
+    background: white;
+    opacity: 0.9;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    z-index: 2;
+}
+
+.wd-video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.wd-video-container iframe,
+.wd-video-container object,
+.wd-video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+}

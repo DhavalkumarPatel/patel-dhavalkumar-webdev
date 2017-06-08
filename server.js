@@ -13,6 +13,8 @@ var blog = require('./lectures/blog/app');
 blog(app);
 
 require('./assignment/app');
+require('./project/app');
+
 var port = process.env.PORT || 3000;
 
 app.listen(port);

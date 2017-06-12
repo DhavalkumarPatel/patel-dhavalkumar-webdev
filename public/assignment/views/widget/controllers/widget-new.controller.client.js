@@ -45,6 +45,12 @@
             formatted: false
         };
 
+        var newHTML = {
+            widgetType: "HTML",
+            name: "Name for HTML Widget",
+            text: "<b>Text for HTML Widget</b>"
+        }
+
         function createWidget(widgetType) {
             var newWidget = {};
             if (widgetType === 'HEADING') {
@@ -55,6 +61,8 @@
                 newWidget = newYoutube;
             } else if (widgetType === 'TEXT') {
                 newWidget = newText;
+            } else if (widgetType === 'HTML') {
+                newWidget = newHTML;
             }
             newWidget.pageId = model.pageId;
 

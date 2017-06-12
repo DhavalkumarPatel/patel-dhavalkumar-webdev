@@ -10,7 +10,7 @@
                         </a>
                     </p>
                     <a class="navbar-brand">
-                        HTML Editor
+                        Text Input Editor
                     </a>
                     <p class="navbar-text pull-right">
                         <a ng-click="model.updateWidget(model.widget)"
@@ -26,21 +26,29 @@
 
 <div class="container-fluid wd-widget-edit">
 
-    <label for="name">Name</label>
-    <input ng-model="model.widget.name"
+    <label for="text">Text</label>
+    <input ng-model="model.widget.text"
            class="form-control"
-           placeholder="facebook"
-           id="name"/>
+           placeholder="text"
+           id="text"/>
 
-    <label for="html">HTML</label>
-    <div ng-model="model.widget.text"
-         class="bottom-margin"
-         text-angular
-         id="html"
-         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
-            ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
-            ['indent','outdent'],['html']]">
-    </div>
+    <label for="rows">Rows</label>
+    <input ng-model="model.widget.rows"
+           class="form-control"
+           placeholder="rows"
+           id="rows"
+           type="number"/>
+
+    <label for="placeholder">Placeholder</label>
+    <input ng-model="model.widget.placeholder"
+           class="form-control"
+           placeholder="placeholder"
+           id="placeholder"/>
+
+    <label for="formatted">Formatted</label>
+    <input ng-model="model.widget.formatted"
+           type="checkbox"
+           id="formatted"/>
 
     <a ng-click="model.updateWidget(model.widget)"
        class="btn btn-block btn-success">

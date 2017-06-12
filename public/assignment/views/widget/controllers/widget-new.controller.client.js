@@ -37,6 +37,14 @@
             url: "https://youtu.be/AM2Ivdi9c4E"
         };
 
+        var newText = {
+            widgetType: "TEXT",
+            text: "default input text",
+            rows: 3,
+            placeholder: "placeholder text",
+            formatted: false
+        };
+
         function createWidget(widgetType) {
             var newWidget = {};
             if (widgetType === 'HEADING') {
@@ -45,6 +53,8 @@
                 newWidget = newImage;
             } else if (widgetType === 'YOUTUBE') {
                 newWidget = newYoutube;
+            } else if (widgetType === 'TEXT') {
+                newWidget = newText;
             }
             newWidget.pageId = model.pageId;
 

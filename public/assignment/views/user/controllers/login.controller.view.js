@@ -29,6 +29,8 @@
                     } else {
                         model.error = "Incorrect credentials. Please enter valid Username and Password.";
                     }
+                }, function () {
+                    model.error = "Incorrect credentials. Please enter valid Username and Password.";
                 });
         }
     }

@@ -18,7 +18,7 @@
                     widgetService
                         .sortWidget(scope.model.pageId, orgLoc, index)
                         .then(function () {
-                            $location.url('/user/'+scope.model.userId+'/website/'+scope.model.websiteId+"/page/"+scope.model.pageId+"/widget");
+                            $location.url('/website/'+scope.model.websiteId+"/page/"+scope.model.pageId+"/widget");
                         });
                 }
             });

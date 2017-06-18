@@ -5,11 +5,12 @@
 
     function widgetListController($sce,
                                   $routeParams,
+                                  currentUser,
                                   widgetService) {
 
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 

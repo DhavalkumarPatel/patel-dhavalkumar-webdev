@@ -21,7 +21,9 @@
     <div ng-show="model.message" class="alert alert-info">
         {{model.message}}
     </div>
-    <form>
+
+    <form name="myForm">
+
         <div class="form-group">
             <label for="username">
                 Username
@@ -33,7 +35,8 @@
                    id="username"
                    placeholder="AliceW">
         </div>
-        <div class="form-group">
+
+        <div class="form-group" ng-class="{ 'has-error' : (!myForm.email.$pristine || submitted) && myForm.email.$invalid }">
             <label for="email">
                 Email address
             </label>
@@ -41,8 +44,13 @@
                    type="email"
                    class="form-control"
                    id="email"
+                   name="email"
                    placeholder="alice@wonderland.com">
+            <div ng-show="(!myForm.email.$pristine || submitted) && myForm.email.$invalid" class="help-block">
+                Enter a valid email.
+            </div>
         </div>
+
         <div class="form-group">
             <label for="first-name">
                 First Name
@@ -53,6 +61,7 @@
                    id="first-name"
                    placeholder="Alice">
         </div>
+
         <div class="form-group">
             <label for="last-name">
                 Last Name
@@ -63,24 +72,27 @@
                    id="last-name"
                    placeholder="Wonderland">
         </div>
+
+
+        <a ng-click="myForm.email.$invalid ? submitted=true : model.updateUser(model.user)"
+           class="btn btn-success btn-block">
+            Update
+        </a>
+        <a ng-click="model.unregister()"
+           class="btn btn-danger btn-block">
+            Unregister
+        </a>
+        <a class="btn btn-primary btn-block"
+           href="#!/website">
+            Websites
+        </a>
+        <a class="btn btn-danger  btn-block"
+           ng-click="model.logout()">
+            Logout
+        </a>
+
     </form>
 
-    <a ng-click="model.updateUser(model.user)"
-       class="btn btn-success btn-block">
-        Update
-    </a>
-    <a ng-click="model.deleteUser(model.user)"
-       class="btn btn-danger btn-block">
-        Unregister
-    </a>
-    <a class="btn btn-primary btn-block"
-       href="#!/user/{{model.userId}}/website">
-        Websites
-    </a>
-    <a class="btn btn-danger  btn-block"
-       href="#!/login">
-        Logout
-    </a>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

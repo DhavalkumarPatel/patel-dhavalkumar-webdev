@@ -72,3 +72,17 @@ function deletePage(websiteId, pageId) {
             return website.save();
         });
 }
+
+function findAllWebsitesForUser(userId) {
+    return websiteModel
+        .find({_user: userId})
+        .populate('_user')
+        .exec();
+
+    return websiteModel
+        .remove({_id: websiteId})
+        .then(function (status) {
+            return userModel
+                .deleteWebsite(userId, websiteId);
+        });
+}

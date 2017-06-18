@@ -5,20 +5,20 @@
     
     function profileController($location,
                                $routeParams,
+                               currentUser,
                                userService) {
         var model = this;
-
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
 
         function init() {
-            userService
-                .findUserById(model.userId)
-                .then(renderUser, userError);
+            renderUser(currentUser);
         }
         init();
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.logout = logout;
+        model.unregister = unregister;
 
         function updateUser(user) {
             userService
@@ -31,6 +31,24 @@
         function deleteUser(user) {
             userService
                 .deleteUser(user._id)
+                .then(function () {
+                    $location.url('/login');
+                }, function () {
+                    model.error = "Unable to delete the user.";
+                });
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
+
+        function unregister() {
+            userService
+                .unregister()
                 .then(function () {
                     $location.url('/');
                 }, function () {

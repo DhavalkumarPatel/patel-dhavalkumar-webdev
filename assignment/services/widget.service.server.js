@@ -79,23 +79,29 @@ function uploadImage(req, res) {
     var websiteId     = req.body.websiteId;
     var pageId        = req.body.pageId;
 
-    var originalname  = myFile.originalname; // file name on user's computer
-    var filename      = myFile.filename;     // new file name in upload folder
-    var path          = myFile.path;         // full path of uploaded file
-    var destination   = myFile.destination;  // folder where file is saved to
-    var size          = myFile.size;
-    var mimetype      = myFile.mimetype;
+    if(myFile) {
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
 
-    widgetModel
-        .findWidgetById(widgetId)
-        .then(function (widget) {
-            widget.url = '/assignment/uploads/' + filename;
-            widgetModel.updateWidget(widgetId, widget)
-                .then(function (status) {
-                    var callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
-                    res.redirect(callbackUrl);
-                });
-        });
+        widgetModel
+            .findWidgetById(widgetId)
+            .then(function (widget) {
+                widget.url = '/assignment/uploads/' + filename;
+                widgetModel.updateWidget(widgetId, widget)
+                    .then(function (status) {
+                        var callbackUrl   = "/assignment/#!/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+                        res.redirect(callbackUrl);
+                    });
+            });
+    }
+    else {
+        var callbackUrl   = "/assignment/#!/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+        res.redirect(callbackUrl);
+    }
 }
 
 function sortWidget(req, res) {

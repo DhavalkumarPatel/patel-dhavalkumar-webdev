@@ -5,27 +5,59 @@
         {{model.error}}
     </div>
 
-    <label for="username">Username</label>
-    <input ng-model="username"
-           type="text"
-           id="username"
-           class="form-control"
-           placeholder="AliceW"/>
+    <form name="myForm">
 
-    <label for="password">Password</label>
-    <input ng-model="password"
-           type="password"
-           id="password"
-           class="form-control"
-           placeholder="AliceW@123"/>
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.username.$touched || submitted) && myForm.username.$invalid }">
+            <label for="username">Username</label>
+            <input ng-model="username"
+                   type="text"
+                   id="username"
+                   name="username"
+                   required
+                   autocorrect="off"
+                   autocapitalize="none"
+                   class="form-control"
+                   placeholder="AliceW"/>
+            <div ng-show="(myForm.username.$touched || submitted) && myForm.username.$invalid" class="help-block">
+                Username is required.
+            </div>
+        </div>
 
-    <a ng-click="model.login(username, password)"
-       class="btn btn-primary btn-block">
-        Login
-    </a>
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.password.$touched || submitted) && myForm.password.$invalid }">
+            <label for="password">Password</label>
+            <input ng-model="password"
+                   type="password"
+                   id="password"
+                   name="password"
+                   required
+                   class="form-control"
+                   placeholder="AliceW@123"/>
+            <div ng-show="(myForm.password.$touched || submitted) && myForm.password.$invalid" class="help-block">
+                Password is required.
+            </div>
+        </div>
 
-    <a class="btn btn-success btn-block"
-       href="#!/register">
-        Register
-    </a>
+        <a ng-click="myForm.username.$invalid || myForm.password.$invalid ? submitted=true : model.login(username, password)"
+           class="btn btn-primary btn-block">
+            Login
+        </a>
+
+        <a class="btn btn-success btn-block"
+           href="#!/register">
+            Register
+        </a>
+
+        <a href="/auth/google" class="btn btn-danger btn-block">
+            <span class="fa fa-google-plus"></span>
+            Google
+        </a>
+
+        <a href="/auth/facebook" class="btn btn-primary btn-block">
+            <span class="fa fa-facebook"></span>
+            Facebook
+        </a>
+
+    </form>
+
+
 </div>

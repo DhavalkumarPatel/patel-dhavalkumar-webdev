@@ -1,34 +1,66 @@
 <div class="container-fluid">
 <h1>Register</h1>
 
-        <div ng-show="model.error"
-             class="alert alert-danger">
-                {{model.error}}
+    <div ng-show="model.error"
+         class="alert alert-danger">
+            {{model.error}}
+    </div>
+
+    <form name="myForm">
+
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.username.$touched || submitted) && myForm.username.$invalid }">
+            <label for="username">Username</label>
+            <input ng-model="username"
+                   type="text"
+                   id="username"
+                   name="username"
+                   required
+                   autocorrect="off"
+                   autocapitalize="none"
+                   class="form-control"
+                   placeholder="AliceW"/>
+            <div ng-show="(myForm.username.$touched || submitted) && myForm.username.$invalid" class="help-block">
+                    Username is required.
+            </div>
         </div>
 
-<label for="username">Username</label>
-<input type="text"
-       id="username"
-       ng-model="username"
-       class="form-control"
-       placeholder="AliceW"/>
-<label for="password">Password</label>
-<input type="password"
-       id="password"
-       ng-model="password"
-       class="form-control"
-       placeholder="AliceW@123"/>
-	   
-<label for="password2">Verify Password</label>
-<input type="password"
-       id="password2"
-       ng-model="password2"
-       class="form-control"
-       placeholder="AliceW@123"/>
-<a ng-click="model.register(username, password, password2)"
-   class="btn btn-primary btn-block">
-        Register
-</a>
-<a class="btn btn-danger  btn-block"
-   href="#!/login">Cancel</a>
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.password.$touched || submitted) && myForm.password.$invalid }">
+            <label for="password">Password</label>
+            <input ng-model="password"
+                   type="password"
+                   id="password"
+                   name="password"
+                   required
+                   class="form-control"
+                   placeholder="AliceW@123"/>
+            <div ng-show="(myForm.password.$touched || submitted) && myForm.password.$invalid" class="help-block">
+                Password is required.
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.password2.$touched || submitted) && myForm.password2.$invalid }">
+            <label for="password2">Verify Password</label>
+            <input ng-model="password2"
+                   type="password"
+                   id="password2"
+                   name="password2"
+                   required
+                   class="form-control"
+                   placeholder="AliceW@123"/>
+            <div ng-show="(myForm.password2.$touched || submitted) && myForm.password2.$invalid" class="help-block">
+                Verify Password is required.
+            </div>
+        </div>
+        <a ng-click="myForm.username.$invalid || myForm.password.$invalid || myForm.password2.$invalid ? submitted=true : model.register(username, password, password2)"
+           class="btn btn-primary btn-block">
+            Register
+        </a>
+        <a class="btn btn-danger  btn-block"
+           href="#!/login">Cancel</a>
+
+    </form>
+
 </div>
+
+
+

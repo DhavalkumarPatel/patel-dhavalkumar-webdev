@@ -5,43 +5,45 @@
 
     function widgetNewController($routeParams,
                                  $location,
+                                 currentUser,
                                  widgetService) {
 
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
         model.createWidget = createWidget;
 
         var newHeader = {
-            name: "default header name",
+            name: "Default header name",
             widgetType: "HEADING",
             size: "2",
-            text: "default header text"};
+            text: "Default header text"};
 
         var newImage = {
             widgetType: "IMAGE",
-            name: "default image name",
-            text: "default image text",
+            name: "Default image name",
+            text: "Default image text",
             width: "100%",
             url: "http://lorempixel.com/400/200/"
         };
 
         var newYoutube = {
             widgetType: "YOUTUBE",
-            name: "default youtube name",
-            text: "default youtube text",
+            name: "Default youtube name",
+            text: "Default youtube text",
             width: "100%",
             url: "https://youtu.be/AM2Ivdi9c4E"
         };
 
         var newText = {
+            name: "Default input name",
             widgetType: "TEXT",
-            text: "default input text",
+            text: "Default input text",
             rows: 3,
-            placeholder: "placeholder text",
+            placeholder: "Placeholder text",
             formatted: false
         };
 
@@ -69,7 +71,7 @@
             widgetService
                 .createWidget(newWidget)
                 .then(function (newWidget) {
-                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+newWidget._id);
+                    $location.url('/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+newWidget._id);
                 });
         }
     }

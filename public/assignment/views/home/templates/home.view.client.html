@@ -13,52 +13,50 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 				<li class="active"><a href="#!/">Home</a></li>
-                <!--<li><a href="#!/admin">Admin</a></li> -->
-                <li><a href="#!/login">Login</a></li>
-                <li><a href="#!/register">Register</a></li>
-                <!--<li><a href="#!/profile">Profile</a></li> -->
-                <!--<li><a href="#!/login">Logout</a></li> -->
+                <!--<li><a href="#!/">Admin</a></li>-->
+                <li ng-show="!model.currentUser._id"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/register">Register</a></li>
+                <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
+                <li ng-show="model.currentUser._id"><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container theme-showcase" role="main">
+    <div ng-show="model.currentUser._id">
+        Welcome {{model.currentUser.username}}, <br/>
+    </div>
+
+    <div class="well top-margin">
+        <h3>Assignment - 6 : Security</h3>
+        <p>This assignment adds security to the ongoing assignment. Previous assignments implemented login and registration, but did not enforce security. Securing single page applications (SPAs) consists of securing access to sensitive views and securing access to APIs and Web services. PassportJS, a Node.js security module, will be used to secure the SPA with username and password, as well as authority providers such as Google and Facebook.</p>
+    </div>
 
     <div class="well">
         <h3>Assignment - 5 : Database Development</h3>
         <p>This module introduces MongoDB as the NoSQL database and persist the data for the Web applications in that database. Mongoose API is used to interact with the MongoDB from Node.js models and services.</p>
     </div>
 
-    <div class="page-header"></div>
-
     <div class="well">
         <h3>Assignment - 4 : Server Side Development</h3>
         <p>Up to this point we have been working mostly on the client, on HTML, CSS, and JavaScript running and rendered dynamically on a browser. We have been using a Node.js server mostly to just host and serve this content when requested from a browser. This module will expand on many more capabilities of Node.js as middle tier software.</p>
     </div>
-
-    <div class="page-header"></div>
 
     <div class="well">
         <h3>Assignment - 3 : User Interface Development</h3>
         <p>In the previous assignment we created a static set of pages that served as a prototype of the Website. The static pages allowed us to explore content related issues such as page layout, styling, navigation, and other presentation related issues. In this assignment we will extend the prototype by making the pages dynamic. Angular.js will be used to implement data services, controllers, and single page navigation.</p>
     </div>
 
-    <div class="page-header"></div>
-
     <div class="well">
         <h3>Assignment - 2 : User Interface Development</h3>
         <p>This assignment focuses on creating a set of static pages that will serve as a prototype. The prototype will allow evaluating user interface aspects of the application such as navigation, information layout, page dependencies, modalities, and authentication. Although the pages will have links, forms and buttons to interact with, the Website won't actually do anything yet. It will only be an empty shell for now. We will add the functionality as we progress through the rest of the assignments. All pages and content is responsive and mobile friendly.</p>
     </div>
 
-    <div class="page-header"></div>
-
     <div class="well">
         <h3>Assignment - 1 : Development Environment</h3>
         <p>This assignment focuses on setting up the development environment. The development environment consists of a local Node.js HTTP server and a MongoDB database server where local development will be performed. It includes setting up remote Git code repositories and to onfigure the repository to auto deploy into a remote Node.js instance hosted at Heroku that will make the Web application publicly available on the Web.</p>
     </div>
-
-    <div class="page-header"></div>
 
     <div class="well">
         <h3>Developer Details</h3>

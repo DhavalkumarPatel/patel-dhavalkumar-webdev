@@ -5,11 +5,12 @@
 
     function widgetEditController($routeParams,
                                   $location,
+                                  currentUser,
                                   widgetService) {
 
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
         model.widgetId = $routeParams['widgetId'];
@@ -33,7 +34,7 @@
             widgetService
                 .updateWidget(model.widgetId, widget)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+"/page/"+model.pageId+"/widget");
+                    $location.url('/website/'+model.websiteId+"/page/"+model.pageId+"/widget");
                 });
         }
 
@@ -41,7 +42,7 @@
             widgetService
                 .deleteWidget(model.pageId, widgetId)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+"/page/"+model.pageId+"/widget");
+                    $location.url('/website/'+model.websiteId+"/page/"+model.pageId+"/widget");
                 });
         }
     }

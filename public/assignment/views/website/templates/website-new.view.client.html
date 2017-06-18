@@ -4,7 +4,7 @@
             <div class="col-xs-4 hidden-xs">
                 <div class="navbar-header">
                     <p class="navbar-text pull-left">
-                        <a href="#!/user/{{model.userId}}/website"
+                        <a href="#!/website"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
@@ -13,7 +13,7 @@
                         Websites
                     </a>
                     <p class="navbar-text pull-right">
-                        <a href="#!/user/{{model.userId}}/website/new"
+                        <a href="#!/website/new"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
@@ -23,7 +23,7 @@
             <div class="col-xs-12 col-sm-8">
                 <div class="navbar-header wd-margin-sx">
                     <p class="navbar-text pull-left visible-xs">
-                        <a href="#!/user/{{model.userId}}/website"
+                        <a href="#!/website"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
@@ -45,35 +45,51 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-4 hidden-xs">
-            <div ng-include="'views/website/templates/website-list-common.view.client.html'"></div>
-        </div>
-        <div class="col-xs-12 col-sm-8">
 
-            <div ng-show="model.error" class="alert alert-danger">
-                {{model.error}}
+    <form name="myForm">
+
+        <div class="row">
+            <div class="col-xs-4 hidden-xs">
+                <div ng-include="'views/website/templates/website-list-common.view.client.html'"></div>
             </div>
+            <div class="col-xs-12 col-sm-8">
 
-            <label for="name">Website Name</label>
-            <input class="form-control"
-                   ng-model="website.name"
-                   placeholder="facebook"
-                   id="name"/>
+                <div ng-show="model.error" class="alert alert-danger">
+                    {{model.error}}
+                </div>
 
-            <label for="description">Website Description</label>
-            <textarea id="description"
-                      rows="5"
-                      ng-model="website.description"
-                      placeholder="So big it is its own country"
-                      class="form-control"></textarea>
+                <div class="form-group" ng-class="{ 'has-error' : (myForm.name.$touched || submitted) && myForm.name.$invalid }">
+                    <label for="name">Website Name</label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="website.name"
+                           placeholder="Website Name"
+                           id="name"
+                           name="name"
+                           required/>
+                    <div ng-show="(myForm.name.$touched || submitted) && myForm.name.$invalid" class="help-block">
+                        Website Name is required.
+                    </div>
+                </div>
 
-            <a ng-click="model.createWebsite(website)"
-               class="btn btn-block btn-success">
-                Create
-            </a>
+                <div class="form-group">
+                    <label for="description">Website Description</label>
+                    <textarea id="description"
+                              rows="5"
+                              ng-model="website.description"
+                              placeholder="Website Description"
+                              class="form-control"></textarea>
+                </div>
+
+                <a ng-click="myForm.name.$invalid ? submitted=true : model.createWebsite(website)"
+                   class="btn btn-block btn-success">
+                    Create
+                </a>
+            </div>
         </div>
-    </div>
+
+    </form>
+
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

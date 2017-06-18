@@ -4,7 +4,7 @@
             <div class="col-xs-12 col-sm-12">
                 <div class="navbar-header wd-margin-sx">
                     <p class="navbar-text pull-left">
-                        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                        <a href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
@@ -26,31 +26,45 @@
 
 <div class="container-fluid wd-widget-edit">
 
-    <label for="name">Name</label>
-    <input ng-model="model.widget.name"
-           class="form-control"
-           placeholder="facebook"
-           id="name"/>
+    <form name="myForm">
 
-    <label for="html">HTML</label>
-    <div ng-model="model.widget.text"
-         class="bottom-margin"
-         text-angular
-         id="html"
-         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
-            ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
-            ['indent','outdent'],['html']]">
-    </div>
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.name.$touched || submitted) && myForm.name.$invalid }">
+            <label for="name">Widget Name</label>
+            <input class="form-control"
+                   type="text"
+                   ng-model="model.widget.name"
+                   placeholder="Widget Name"
+                   id="name"
+                   name="name"
+                   required/>
+            <div ng-show="(myForm.name.$touched || submitted) && myForm.name.$invalid" class="help-block">
+                Widget Name is required.
+            </div>
+        </div>
 
-    <a ng-click="model.updateWidget(model.widget)"
-       class="btn btn-block btn-success">
-        Update
-    </a>
+        <div class="form-group">
+            <label for="html">HTML</label>
+            <div ng-model="model.widget.text"
+                 class="bottom-margin"
+                 text-angular
+                 id="html"
+                 ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                    ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                    ['indent','outdent'],['html']]">
+            </div>
+        </div>
 
-    <a ng-click="model.deleteWidget(model.widgetId)"
-       class="btn btn-block btn-danger">
-        Delete
-    </a>
+        <a ng-click="myForm.name.$invalid ? submitted=true : model.updateWidget(model.widget)"
+           class="btn btn-block btn-success">
+            Update
+        </a>
+
+        <a ng-click="model.deleteWidget(model.widgetId)"
+           class="btn btn-block btn-danger">
+            Delete
+        </a>
+
+    </form>
 
 </div>
 

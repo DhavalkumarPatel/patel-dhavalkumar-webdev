@@ -19,8 +19,11 @@ require ("./test/app.js")(app);
 var blog = require('./lectures/blog/app');
 blog(app);
 
-require('./assignment/app');
-require('./project/app');
+if(process.env.PROJECT_OR_ASSIGNMENT && process.env.PROJECT_OR_ASSIGNMENT==="PROJECT") {
+    require('./project/app');
+} else {
+    require('./assignment/app');
+}
 
 var port = process.env.PORT || 3000;
 

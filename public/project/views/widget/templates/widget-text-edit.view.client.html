@@ -1,0 +1,91 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Text Input Editor
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a ng-click="model.updateWidget(model.widget)"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid wd-widget-edit">
+
+    <form name="myForm">
+
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.name.$touched || submitted) && myForm.name.$invalid }">
+            <label for="name">Widget Name</label>
+            <input class="form-control"
+                   type="text"
+                   ng-model="model.widget.name"
+                   placeholder="Widget Name"
+                   id="name"
+                   name="name"
+                   required/>
+            <div ng-show="(myForm.name.$touched || submitted) && myForm.name.$invalid" class="help-block">
+                Widget Name is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="text">Text</label>
+            <input ng-model="model.widget.text"
+                   class="form-control"
+                   placeholder="text"
+                   id="text"/>
+        </div>
+
+        <div class="form-group">
+            <label for="rows">Rows</label>
+            <input ng-model="model.widget.rows"
+                   class="form-control"
+                   placeholder="rows"
+                   id="rows"
+                   type="number"/>
+        </div>
+
+        <div class="form-group">
+            <label for="placeholder">Placeholder</label>
+            <input ng-model="model.widget.placeholder"
+                   class="form-control"
+                   placeholder="placeholder"
+                   id="placeholder"/>
+        </div>
+
+        <div class="form-group">
+            <label for="formatted">Formatted</label>
+            <input ng-model="model.widget.formatted"
+                   type="checkbox"
+                   id="formatted"/>
+        </div>
+
+        <a ng-click="myForm.name.$invalid ? submitted=true : model.updateWidget(model.widget)"
+           class="btn btn-block btn-success">
+            Update
+        </a>
+
+        <a ng-click="model.deleteWidget(model.widgetId)"
+           class="btn btn-block btn-danger">
+            Delete
+        </a>
+
+    </form>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

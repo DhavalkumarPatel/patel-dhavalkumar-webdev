@@ -1,4 +1,4 @@
-var connectionString = 'mongodb://127.0.0.1:27017/webdev_summer1_2017_Assignment'; // for local
+var connectionString = 'mongodb://127.0.0.1:27017/webdev_assignment'; // for local
 if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
     var password = process.env.MLAB_PASSWORD_WEBDEV;

@@ -11,7 +11,12 @@
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            login: login,
+            logout: logout,
+            loggedin: loggedin,
+            register: register,
+            unregister: unregister
         };
         return api;
 
@@ -58,6 +63,50 @@
         function deleteUser(userId) {
             var url = "/api/project/user/"+userId;
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        function login(username, password) {
+            var url = "/api/project/login";
+            var credentials = {
+                username: username,
+                password: password
+            };
+            return $http.post(url, credentials)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+
+        function logout() {
+            var url = "/api/project/logout";
+            return $http.post(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function loggedin() {
+            var url = "/api/project/loggedin";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function register(userObj) {
+            var url = "/api/project/register";
+            return $http.post(url, userObj)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function unregister() {
+            var url = "/api/project/unregister";
+            return $http.post(url, {})
                 .then(function (response) {
                     return response.data;
                 });

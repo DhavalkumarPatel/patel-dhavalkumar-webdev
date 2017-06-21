@@ -11,13 +11,8 @@
 
         function register(username, password, password2) {
 
-            if(username === null || username === '' || typeof username === 'undefined') {
-                model.error = 'Username is required.';
-                return;
-            }
-
-            if(password !== password2 || password === null || typeof password === 'undefined') {
-                model.error = "Both Passwords are required and they must match.";
+            if(password !== password2) {
+                model.error = "Both Passwords must match.";
                 return;
             }
 
@@ -33,12 +28,12 @@
                             password: password
                         };
                         return userService
-                            .createUser(newUser);
+                            .register(newUser)
+                            .then(function (user) {
+                                $location.url('/profile');
+                            });
                     }
                 )
-                .then(function (user) {
-                    $location.url('/user/' + user._id);
-                });
         }
     }
 })();

@@ -6,6 +6,18 @@ button.form-control{
     margin-bottom: 5px;
 }
 
+.bottom-margin {
+    margin-bottom: 5px;
+}
+
+.top-margin {
+    margin-top: 10px;
+}
+
+div.btn-group {
+    margin-bottom: 5px;
+}
+
 body {
     padding-top: 60px;
     padding-bottom: 60px;

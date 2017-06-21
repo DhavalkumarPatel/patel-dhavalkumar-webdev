@@ -13,21 +13,24 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 				<li class="active"><a href="#!/">Home</a></li>
-                <li><a href="#!/login">Login</a></li>
-                <li><a href="#!/register">Register</a></li>
-                <li><a href="#!/search">Search</a></li>
+                <!--<li><a href="#!/">Admin</a></li>-->
+                <li ng-show="!model.currentUser._id"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/register">Register</a></li>
+                <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
+                <li ng-show="model.currentUser._id"><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container theme-showcase" role="main">
+    <div ng-show="model.currentUser._id">
+        Welcome {{model.currentUser.username}}, <br/>
+    </div>
 
-    <div class="well">
+    <div class="well top-margin">
         <h3>Project</h3>
         <p>Project Description</p>
     </div>
 
-    <div class="page-header"></div>
-
-</div>
+</div> <!-- /container -->

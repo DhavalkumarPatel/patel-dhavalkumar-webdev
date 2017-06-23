@@ -23,94 +23,140 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/admin.view.client.html',
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/user', {
+                templateUrl: 'views/admin/templates/admin-users.view.client.html',
+                controller: 'adminUsersController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH_FM
                 }
             })
-            .when('/website', {
-                templateUrl: 'views/website/templates/website-list.view.client.html',
-                controller: 'websiteListController',
+            .when('/followUser', {
+                templateUrl: 'views/followUser/templates/followUser-list.view.client.html',
+                controller: 'followUserListController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH_FM
                 }
             })
-            .when('/website/new', {
-                templateUrl: 'views/website/templates/website-new.view.client.html',
-                controller: 'websiteNewController',
+            .when('/followUser/new', {
+                templateUrl: 'views/followUser/templates/followUser-new.view.client.html',
+                controller: 'followUserNewController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH_FM
                 }
             })
-            .when('/website/:websiteId', {
-                templateUrl: 'views/website/templates/website-edit.view.client.html',
-                controller: 'websiteEditController',
+            .when('/user/public/:publicUserId', {
+                templateUrl: 'views/user/templates/profile-public.view.client.html',
+                controller: 'publicProfileController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH_FM
                 }
             })
-            .when('/website/:websiteId/page', {
-                templateUrl: 'views/page/templates/page-list.view.client.html',
-                controller: 'pageListController',
+            .when('/financialAccount', {
+                templateUrl: 'views/financialAccount/templates/financialAccount-list.view.client.html',
+                controller: 'financialAccountListController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH
                 }
             })
-            .when('/website/:websiteId/page/new', {
-                templateUrl: 'views/page/templates/page-new.view.client.html',
-                controller: 'pageNewController',
+            .when('/financialAccount/new', {
+                templateUrl: 'views/financialAccount/templates/financialAccount-new.view.client.html',
+                controller: 'financialAccountNewController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH
                 }
             })
-            .when('/website/:websiteId/page/:pageId', {
-                templateUrl: 'views/page/templates/page-edit.view.client.html',
-                controller: 'pageEditController',
+            .when('/financialAccount/:financialAccountId', {
+                templateUrl: 'views/financialAccount/templates/financialAccount-edit.view.client.html',
+                controller: 'financialAccountEditController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH
                 }
             })
-            .when('/website/:websiteId/page/:pageId/widget', {
-                templateUrl: 'views/widget/templates/widget-list.view.client.html',
-                controller: 'widgetListController',
+            .when('/familyMember', {
+                templateUrl: 'views/familyMember/templates/family-member.view.client.html',
+                controller: 'familyMemberController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
-                }
-            })
-            .when('/website/:websiteId/page/:pageId/widget/new', {
-                templateUrl: 'views/widget/templates/widget-choose.view.client.html',
-                controller: 'widgetNewController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
-            })
-            .when('/website/:websiteId/page/:pageId/widget/:widgetId', {
-                templateUrl: 'views/widget/templates/widget-edit.view.client.html',
-                controller: 'widgetEditController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
-            })
-            .when('/website/:websiteId/page/:pageId/widget/:widgetId/search', {
-                templateUrl: 'views/widget/templates/widget-flickr-search.view.client.html',
-                controller: 'flickrImageSearchController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkHH_FM
                 }
             });
+
+
+
+    }
+    
+    function checkAdmin(userService, $q, $location) {
+        var deferred = $q.defer();
+
+        userService
+            .checkAdmin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkHH_FM(userService, $q, $location) {
+        var deferred = $q.defer();
+
+        userService
+            .checkHH_FM()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkHH(userService, $q, $location) {
+        var deferred = $q.defer();
+
+        userService
+            .checkHH()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
     }
     
     function checkLoggedIn(userService, $q, $location) {

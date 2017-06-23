@@ -25,17 +25,27 @@ var facebookConfig = {
 };
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
-app.post('/api/project/user', createUser);
-app.get('/api/project/user', findAllUsers);
-app.get('/api/project/user/:userId', findUserById);
-app.put('/api/project/user/:userId', updateUser);
-app.delete('/api/project/user/:userId', deleteUser);
+app.post('/api/project/user', isAdmin, createUser);
+app.put('/api/project/user/:userId', isAdmin, updateUser);
+app.delete('/api/project/user/:userId',isAdmin, deleteUser);
 
+app.post('/api/project/familyMember', isHouseHold, createFamilyMember);
+app.put('/api/project/familyMember/:userId', isHouseHold, updateFamilyMember);
+app.delete('/api/project/familyMember/:userId',isHouseHold, deleteFamilyMember);
+
+app.get('/api/project/user/:userId', findUserById);
+app.get('/api/project/user',findAllUsers);
+app.get('/api/project/user/public/:userId', findRestrictedUserDetailsById);
+app.get('/api/project/familyMember/:userId', findAllFamilyMembers);
 app.post('/api/project/login', passport.authenticate('local'), login);
 app.get('/api/project/loggedin', loggedin);
+app.get('/api/project/checkAdmin', checkAdmin);
+app.get('/api/project/checkHH_FM', checkHH_FM);
+app.get('/api/project/checkHH', checkHH);
 app.post('/api/project/logout', logout);
 app.post('/api/project/register', register);
 app.post('/api/project/unregister', unregister);
+app.put('/api/project/updateProfile/:userId', updateProfile);
 
 app.get('/auth/project/google',
     passport.authenticate('google', {
@@ -58,8 +68,31 @@ app.get('/auth/project/facebook/callback',
         failureRedirect: '/project/#!/login'
     }));
 
+function isAdmin(req,res,next) {
+    if(req.isAuthenticated() && req.user.role === 'ADMIN')
+    {
+        next();
+    }else
+    {
+        res.sendStatus(401);
+    }
+}
+
+function isHouseHold(req,res,next) {
+    if(req.isAuthenticated() && req.user.role === 'HOUSEHOLD')
+    {
+        next();
+    }else
+    {
+        res.sendStatus(401);
+    }
+}
+
 function createUser(req, res) {
     var user = req.body;
+    if(!user.password) {
+        user.password = 'password';
+    }
     user.password = bcrypt.hashSync(user.password);
     userModel
         .createUser(user)
@@ -102,10 +135,28 @@ function findAllUsers(req, res) {
     }
 }
 
+function findAllFamilyMembers(req, res) {
+    var userId = req.params['userId'];
+    userModel
+        .findAllFamilyMembers(userId)
+        .then(function (members) {
+            res.json(members);
+        });
+}
+
 function findUserById(req, res) {
     var userId = req.params['userId'];
     userModel
         .findUserById(userId)
+        .then(function (user) {
+            res.json(user);
+        });
+}
+
+function findRestrictedUserDetailsById(req, res) {
+    var userId = req.params['userId'];
+    userModel
+        .findRestrictedUserDetailsById(userId)
         .then(function (user) {
             res.json(user);
         });
@@ -157,6 +208,29 @@ function loggedin(req, res) {
     }
 }
 
+function checkAdmin(req, res) {
+    if(req.isAuthenticated() && req.user.role === 'ADMIN') {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
+
+function checkHH_FM(req, res) {
+    if(req.isAuthenticated() && (req.user.role === 'HOUSEHOLD' || req.user.role === 'FAMILY-MEMBER')) {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
+
+function checkHH(req, res) {
+    if(req.isAuthenticated() && req.user.role === 'HOUSEHOLD') {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
 function logout(req, res) {
     req.logout();
     res.sendStatus(200);
@@ -165,6 +239,7 @@ function logout(req, res) {
 function register(req, res) {
     var userObj = req.body;
     userObj.password = bcrypt.hashSync(userObj.password);
+    userObj.role = 'HOUSEHOLD';
     userModel
         .createUser(userObj)
         .then(function (user) {
@@ -214,6 +289,7 @@ function googleStrategy(token, refreshToken, profile, done) {
                         username:  'G_' + emailParts[0],
                         firstName: profile.name.givenName,
                         lastName:  profile.name.familyName,
+                        role: 'HOUSEHOLD',
                         email:     email,
                         google: {
                             id:    profile.id,
@@ -251,6 +327,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
                         username:  'F_' + emailParts[0],
                         firstName: profile.name.givenName,
                         lastName:  profile.name.familyName,
+                        role: 'HOUSEHOLD',
                         email:     email,
                         facebook: {
                             id:    profile.id,
@@ -272,4 +349,48 @@ function facebookStrategy(token, refreshToken, profile, done) {
                 if (err) { return done(err); }
             }
         );
+}
+
+function createFamilyMember(req, res) {
+    var user = req.body;
+    if(!user.password) {
+        user.password = 'password';
+    }
+    user.password = bcrypt.hashSync(user.password);
+    user.role = 'FAMILY-MEMBER';
+    userModel
+        .createUser(user)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.send(err);
+        });
+}
+
+function updateFamilyMember(req, res) {
+    var user = req.body;
+    userModel
+        .updateUser(req.params.userId, user)
+        .then(function (status) {
+            res.send(status);
+        });
+}
+
+function deleteFamilyMember(req, res) {
+    var userId = req.params.userId;
+    userModel
+        .deleteUser(userId)
+        .then(function (status) {
+            res.send(status);
+        });
+}
+
+
+function updateProfile(req, res) {
+    var user = req.body;
+    userModel
+        .updateUser(req.params.userId, user)
+        .then(function (status) {
+            res.send(status);
+        });
 }

@@ -1,0 +1,103 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <p class="navbar-text pull-left">
+                <a href="#!/familyMember"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand">
+                Profile of {{model.publicUser.firstName}}
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/"
+                   class="navbar-link" style="margin-right: 15px" title="Home">
+                    <span class="glyphicon glyphicon-home"></span>
+                </a>
+
+                <a ng-click="model.logout()"
+                   class="navbar-link" title="Logout">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>First Name:</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.publicUser.firstName}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>Last Name</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.publicUser.lastName}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b> Email Address</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.publicUser.email}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>Phone</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.publicUser.phone}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>Date of Birth</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.publicUser.dob | date}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>Address</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.publicUser.address}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>Account Creation Date</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.publicUser.dateCreated | date}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

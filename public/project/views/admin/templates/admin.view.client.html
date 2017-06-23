@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand">
-                Profile
+                Admin Profile
             </a>
             <p class="navbar-text pull-right">
                 <a href="#!/"
@@ -121,25 +121,19 @@
                    placeholder="Address">
         </div>
 
-        <a ng-click="(myForm.email.$invalid || myForm.phone.$invalid || myForm.dob.$invalid) ? submitted=true : model.updateProfile(model.user)"
+        <a ng-click="(myForm.email.$invalid || myForm.phone.$invalid || myForm.dob.$invalid) ? submitted=true : model.updateUser(model.user)"
            class="btn btn-success btn-block">
             Update
         </a>
 
         <a class="btn btn-primary btn-block"
-           href="#!/followUser">
-            Users You Follow
-        </a>
-
-        <a ng-show="model.user._id && model.user.role === 'HOUSEHOLD'"
-           class="btn btn-primary btn-block"
-           href="#!/financialAccount">
-            Financial Accounts
+           href="#!/admin/user">
+            Users
         </a>
 
         <a class="btn btn-primary btn-block"
-           href="#!/familyMember">
-            Family Members
+           href="#!/">
+            Financial Accounts
         </a>
 
         <a class="btn btn-danger  btn-block"
@@ -147,14 +141,14 @@
             Logout
         </a>
 
-        <a ng-click="model.unregister()"
-           class="btn btn-danger btn-block">
-            Unregister
-        </a>
-
     </form>
 
 </div>
 
-<div ng-include="'views/common/footer.view.client.html'"></div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        </div>
+    </div>
+</nav>
 

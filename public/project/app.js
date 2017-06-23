@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('OFM', ['ngRoute', 'wbdvDirectives', 'textAngular']);
+        .module('OFM', ['ngRoute', 'textAngular']);
 })();

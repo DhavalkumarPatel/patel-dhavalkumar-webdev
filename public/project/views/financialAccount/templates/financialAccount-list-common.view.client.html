@@ -1,0 +1,40 @@
+<ul class="list-group">
+    <li class="list-group-item active">
+        <div class="row">
+            <div class="col-lg-4 col-md-7 col-xs-10">
+                Account No
+            </div>
+            <div class="col-lg-3 visible-lg">
+                Account Type
+            </div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+                Account Name
+            </div>
+            <div class="col-xs-2">
+                <a href="#!/financialAccount/new" class="colorWhite">
+                    <span class="glyphicon glyphicon-plus pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <li ng-repeat="financialAccount in model.financialAccounts"
+        class="list-group-item">
+        <div class="row">
+            <div class="col-lg-4 col-md-7 col-xs-10">
+                {{financialAccount.accountNumber}}
+            </div>
+            <div class="col-lg-3 visible-lg">
+                {{financialAccount.accountType}}
+            </div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+                {{financialAccount.accountName}}
+            </div>
+            <div class="col-xs-2">
+                <a href="#!/financialAccount/{{financialAccount._id}}">
+                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </li>
+</ul>

@@ -14,8 +14,11 @@ var userSchema = mongoose.Schema({
         id:    String,
         token: String
     },
+    role: {type: String, enum: ['HOUSEHOLD', 'FAMILY-MEMBER', 'ADMIN']},
     phone: {type: Number},
-    websites: [{type: mongoose.Schema.Types.ObjectId, ref: "OFM_WebsiteModel"}],
+    dob: {type: Date},
+    address: String,
+    _houseHoldUser: {type: mongoose.Schema.Types.ObjectId, ref: "OFM_UserModel"},
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "OFM_user"});
 

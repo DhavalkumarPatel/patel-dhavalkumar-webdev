@@ -5,14 +5,16 @@ var userModel = mongoose.model('OFM_UserModel', userSchema);
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
 userModel.findAllUsers = findAllUsers;
+userModel.findAllFamilyMembers = findAllFamilyMembers;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
-userModel.addWebsite = addWebsite;
-userModel.deleteWebsite = deleteWebsite;
+userModel.searchAndFilterUsers = searchAndFilterUsers;
+userModel.findAllFollowedUsers = findAllFollowedUsers;
+userModel.findRestrictedUserDetailsById = findRestrictedUserDetailsById;
 
 module.exports = userModel;
 
@@ -24,8 +26,19 @@ function findUserById(userId) {
     return userModel.findById(userId);
 }
 
+function findRestrictedUserDetailsById(userId) {
+    return userModel
+        .findById(userId);
+}
+
 function findAllUsers() {
     return userModel.find();
+}
+
+function findAllFamilyMembers(userId) {
+    return userModel
+        .find({$or: [ { _id: userId },
+                { _houseHoldUser : userId } ]});
 }
 
 function findUserByUsername(username) {
@@ -47,6 +60,7 @@ function findUserByFacebookId(facebookId) {
 function updateUser(userId, newUser) {
     delete newUser.username;
     delete newUser.password;
+    delete newUser._houseHoldUser;
     return userModel.update({_id: userId}, {$set: newUser});
 }
 
@@ -54,21 +68,15 @@ function deleteUser(userId) {
     return userModel.remove({_id: userId});
 }
 
-function addWebsite(userId, websiteId) {
+function searchAndFilterUsers(followedUsers, searchText) {
     return userModel
-        .findById(userId)
-        .then(function (user) {
-            user.websites.push(websiteId);
-            return user.save();
-        });
+        .find({
+            _id: { $nin: followedUsers },
+            $or: [ { firstName: {'$regex' : searchText, '$options' : 'i'} },
+                { lastName : {'$regex' : searchText, '$options' : 'i'} } ] });
 }
 
-function deleteWebsite(userId, websiteId) {
+function findAllFollowedUsers(followedUsers) {
     return userModel
-        .findById(userId)
-        .then(function (user) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index, 1);
-            return user.save();
-        });
+        .find({_id: { $in: followedUsers }});
 }

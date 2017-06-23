@@ -2202,5 +2202,40 @@ textarea {
 	}
 }
 
+
+.wd-widget > img {
+	width: 100%;
+}
+
+.wd-widget > .wd-widget-toolbar {
+	position: absolute;
+	right: 15px;
+	background: white;
+	opacity: 0.9;
+	padding: 5px;
+	border-bottom-left-radius: 10px;
+}
+
+.wd-video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.wd-video-container iframe,
+.wd-video-container object,
+.wd-video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 500px;
+	z-index: 1;
+}
+
+.minHeight {
+	min-height:750px;
+}
 /*-- //responsive-ends-here --*/
 

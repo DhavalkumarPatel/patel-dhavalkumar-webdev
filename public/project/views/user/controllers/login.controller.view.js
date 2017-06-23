@@ -15,7 +15,11 @@
                 .login(username, password)
                 .then(function (found) {
                     if(found !== null) {
-                        $location.url('/profile');
+                        if(found.role === 'ADMIN') {
+                            $location.url('/admin');
+                        } else {
+                            $location.url('/profile');
+                        }
                     } else {
                         model.error = "Incorrect credentials. Please enter valid Username and Password.";
                     }

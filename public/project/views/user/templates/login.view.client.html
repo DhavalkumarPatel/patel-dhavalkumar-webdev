@@ -1,6 +1,32 @@
-<div class="container-fluid">
-    <h1>Login</h1>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#!/">Home</a></li>
+                <!--<li><a href="#!/">Admin</a></li>-->
+                <li ng-show="!model.currentUser._id" class="active"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/register">Register</a></li>
+                <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
+                <li><a target="_blank" href="https://github.com/DhavalkumarPatel/patel-dhavalkumar-webdev">GitHub</a></li>
+                <li><a target="_blank" href="https://youtu.be/A3B7mifHMhM?list=PL_GGiAMracOXEpxjhLR9Kbd5ZS8Ob6buZ">Demo</a></li>
+                <li><a target="_blank" href="/test">Test MonogoDB</a></li>
+                <li ng-show="model.currentUser._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
+
+
+<div class="container-fluid">
     <div ng-show="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
@@ -17,7 +43,7 @@
                    autocorrect="off"
                    autocapitalize="none"
                    class="form-control"
-                   placeholder="AliceW"/>
+                   placeholder="Username"/>
             <div ng-show="(myForm.username.$touched || submitted) && myForm.username.$invalid" class="help-block">
                 Username is required.
             </div>
@@ -31,7 +57,7 @@
                    name="password"
                    required
                    class="form-control"
-                   placeholder="AliceW@123"/>
+                   placeholder="Password"/>
             <div ng-show="(myForm.password.$touched || submitted) && myForm.password.$invalid" class="help-block">
                 Password is required.
             </div>
@@ -40,11 +66,6 @@
         <a ng-click="myForm.username.$invalid || myForm.password.$invalid ? submitted=true : model.login(username, password)"
            class="btn btn-primary btn-block">
             Login
-        </a>
-
-        <a class="btn btn-success btn-block"
-           href="#!/register">
-            Register
         </a>
 
         <a href="/auth/project/google" class="btn btn-danger btn-block">

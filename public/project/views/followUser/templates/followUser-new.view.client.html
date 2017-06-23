@@ -1,0 +1,111 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/followUser"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Search Users
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/"
+                           class="navbar-link" style="margin-right: 15px" title="Home">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+
+                        <a ng-click="model.logout()"
+                           class="navbar-link" title="Logout">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <form name="myForm">
+
+        <div class="row">
+            <div class="col-xs-9 col-sm-11">
+                <input class="form-control"
+                       type="text"
+                       ng-model="model.searchText"
+                       placeholder="Search User by First or Last Name"
+                       id="searchText"
+                       name="searchText"
+                       required/>
+            </div>
+            <div class="col-xs-3 col-sm-1">
+                <a ng-click="model.searchUser(model.searchText)">
+                    <span class="glyphicon glyphicon-search btn btn-success pull-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="top-margin" ng-show="model.userList && model.userList.length>0">
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-7">
+                            First Name
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-5 hidden-xs">
+                            Last Name
+                        </div>
+                        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                            Email
+                        </div>
+                        <div class="col-lg-2 hidden-md hidden-sm hidden-xs">
+                            Phone
+                        </div>
+                        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-5">
+                        </div>
+                    </div>
+                </li>
+
+                <li ng-repeat="userFromList in model.userList"
+                    class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-7">
+                            {{userFromList.firstName}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-5 hidden-xs">
+                            {{userFromList.lastName}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                            {{userFromList.email}}
+                        </div>
+                        <div class="col-lg-2 hidden-md hidden-sm hidden-xs">
+                            {{userFromList.phone}}
+                        </div>
+                        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-5">
+                            <a ng-click="model.followUser(userFromList._id)"
+                               class="btn btn-success pull-right">
+                                Follow
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div ng-show="model.userList && model.userList.length===0"
+             class="top-margin alert alert-info">
+            No User found for {{model.searchText}}. <br/>
+            This search will find only those users which are not yet followed by you and whose either First Name or Last Name matches with your search text.
+        </div>
+
+    </form>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
+

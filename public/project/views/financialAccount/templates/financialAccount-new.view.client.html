@@ -1,0 +1,114 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 hidden-xs">
+                <div class="navbar-header">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/financialAccount"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Financial Accounts
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left visible-xs">
+                        <a href="#!/financialAccount"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        New Financial Account
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/"
+                           class="navbar-link" style="margin-right: 15px" title="Home">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+
+                        <a ng-click="model.logout()"
+                           class="navbar-link" title="Logout">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+
+    <form name="myForm">
+
+        <div class="row">
+            <div class="col-xs-4 hidden-xs">
+                <div ng-include="'views/financialAccount/templates/financialAccount-list-common.view.client.html'"></div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+
+                <div ng-show="model.error" class="alert alert-danger">
+                    {{model.error}}
+                </div>
+
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <select id="accountType"
+                            name="accountType"
+                            ng-model="financialAccount.accountType"
+                            class="form-control"
+                            ng-init="financialAccount.accountType='Bank'">
+                        <option value="Bank">Bank</option>
+                        <option value="CreditCard">Credit Card</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : (myForm.accountName.$touched || submitted) && myForm.accountName.$invalid }">
+                    <label for="accountName">Account Name</label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="financialAccount.accountName"
+                           placeholder="Account Name"
+                           id="accountName"
+                           name="accountName"
+                           required/>
+                    <div ng-show="(myForm.accountName.$touched || submitted) && myForm.accountName.$invalid" class="help-block">
+                        Account Name is required.
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : (myForm.accountNumber.$touched || submitted) && myForm.accountNumber.$invalid }">
+                    <label for="accountNumber">Account Number</label>
+                    <input class="form-control"
+                           type="text"
+                           ng-model="financialAccount.accountNumber"
+                           placeholder="Account Number"
+                           id="accountNumber"
+                           name="accountNumber"
+                           required/>
+                    <div ng-show="(myForm.accountNumber.$touched || submitted) && myForm.accountNumber.$invalid" class="help-block">
+                        Account Number is required.
+                    </div>
+                </div>
+
+                <a ng-click="(myForm.accountName.$invalid || myForm.accountNumber.$invalid) ? submitted=true : model.createFinancialAccount(financialAccount)"
+                   class="btn btn-block btn-success">
+                    Create
+                </a>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
+

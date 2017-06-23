@@ -1,26 +1,26 @@
 (function () {
     angular
         .module('OFM')
-        .controller('profileController', profileController);
-    
-    function profileController($location,
-                               $routeParams,
-                               currentUser,
-                               userService) {
+        .controller('adminController', adminController);
+
+    function adminController(userService,
+                                  currentUser) {
+
         var model = this;
         model.userId = currentUser._id;
+
         function init() {
             renderUser(currentUser);
         }
+
         init();
 
-        model.updateProfile = updateProfile;
+        model.updateUser = updateUser;
         model.logout = logout;
-        model.unregister = unregister;
 
-        function updateProfile(user) {
+        function updateUser(user) {
             userService
-                .updateProfile(user._id, user)
+                .updateUser(user._id, user)
                 .then(function () {
                     model.message = 'User profile updated successfully.';
                 })
@@ -31,16 +31,6 @@
                 .logout()
                 .then(function () {
                     $location.url('/login');
-                });
-        }
-
-        function unregister() {
-            userService
-                .unregister()
-                .then(function () {
-                    $location.url('/');
-                }, function () {
-                    model.error = "Unable to unregister you.";
                 });
         }
 

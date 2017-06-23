@@ -1,0 +1,143 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/profile"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand" title="Users you are following.">
+                        Family Members
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/"
+                           class="navbar-link" style="margin-right: 15px" title="Home">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+
+                        <a ng-click="model.logout()"
+                           class="navbar-link" title="Logout">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <form name="myForm">
+
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+        <div ng-show="(myForm.username.$touched || submitted) && myForm.username.$invalid" class="alert alert-danger">
+            Username is required.
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item active">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        Username
+                    </div>
+                    <div class="col-sm-2 hidden-xs">
+                        First Name
+                    </div>
+                    <div class="col-sm-2 hidden-xs">
+                        Last Name
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        Role
+                    </div>
+                    <div class="col-sm-2 col-xs-5">
+
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item" ng-show="model.loggedinUser.role === 'HOUSEHOLD'">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        <input ng-model="model.user.username"
+                               ng-show="model.user._id"
+                               readonly
+                               class="form-control"
+                               placeholder="Username"/>
+                        <input ng-model="model.user.username"
+                               ng-hide="model.user._id"
+                               name="username"
+                               required
+                               autocorrect="off"
+                               autocapitalize="none"
+                               class="form-control"
+                               placeholder="Username"/>
+                    </div>
+                    <div class="col-sm-2 hidden-xs">
+                        <input ng-model = "model.user.firstName"
+                               class="form-control"
+                               placeholder="FirstName"/>
+                    </div>
+                    <div class="col-sm-2 hidden-xs">
+                        <input ng-model="model.user.lastName"
+                               class="form-control"
+                               placeholder="LastName"/>
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        <select ng-model="model.user.role"
+                                 class="form-control"
+                                ng-init="model.user.role = 'FAMILY-MEMBER'">
+                            <option value="FAMILY-MEMBER">FAMILY-MEMBER</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-xs-5">
+                        <span ng-click="model.updateFamilyMember(model.user);model.user={role:'FAMILY-MEMBER'};submitted=false;myForm.username.$touched=false"
+                              ng-show="model.user._id" class="btn btn-success glyphicon glyphicon-ok pull-right"></span>
+                        <span ng-click="myForm.username.$invalid ? submitted=true : model.createFamilyMember(model.user);model.user={role:'FAMILY-MEMBER'};submitted=false;myForm.username.$touched=false"
+                              ng-hide="model.user._id" class="btn btn-success glyphicon glyphicon-plus pull-right"></span>
+                    </div>
+                </div>
+            </li>
+            <li ng-repeat="user in model.users" class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        <a href="#!/user/public/{{user._id}}">
+                            {{user.username}}
+                        </a>
+                    </div>
+                    <div class="col-sm-2 hidden-xs">
+                        {{user.firstName}}
+                    </div>
+                    <div class="col-sm-2 hidden-xs">
+                        {{user.lastName}}
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        {{user.role}}
+                    </div>
+                    <div class="col-sm-2 col-xs-5" ng-show="model.loggedinUser.role === 'HOUSEHOLD'">
+                        <div class="pull-right">
+                            <span ng-click="model.selectUser(user)"
+                              class="btn btn-success glyphicon glyphicon-pencil"></span>
+                            <span ng-click="model.deleteFamilyMember(user)"
+                              class="btn btn-danger glyphicon glyphicon-remove" ></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-xs-5" ng-hide="model.loggedinUser.role === 'HOUSEHOLD'">
+                        <div class="pull-right">
+                            <a href="#!/user/public/{{user._id}}" class="btn btn-success">
+                                Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

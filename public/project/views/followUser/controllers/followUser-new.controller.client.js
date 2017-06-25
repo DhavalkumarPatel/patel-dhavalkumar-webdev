@@ -16,9 +16,10 @@
         model.searchUser = searchUser;
         model.logout = logout;
 
-        function renderWebsites(websites) {
-            model.websites = websites;
+        function  init() {
+            searchUser('All');
         }
+        init();
 
         function followUser(followedUserId) {
             followUserService

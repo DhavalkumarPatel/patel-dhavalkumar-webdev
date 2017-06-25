@@ -36,7 +36,6 @@ function findAllUsers() {
     return userModel.find();
 }
 
-
 function findAllUsersForRole(role) {
     return userModel
         .find({role: role});
@@ -76,11 +75,16 @@ function deleteUser(userId) {
 }
 
 function searchAndFilterUsers(followedUsers, searchText) {
-    return userModel
-        .find({
-            _id: { $nin: followedUsers },
-            $or: [ { firstName: {'$regex' : searchText, '$options' : 'i'} },
-                { lastName : {'$regex' : searchText, '$options' : 'i'} } ] });
+    if(searchText && searchText === 'All') {
+        return userModel
+            .find({_id: { $nin: followedUsers }});
+    } else {
+        return userModel
+            .find({
+                _id: { $nin: followedUsers },
+                $or: [ { firstName: {'$regex' : searchText, '$options' : 'i'} },
+                    { lastName : {'$regex' : searchText, '$options' : 'i'} } ] });
+    }
 }
 
 function findAllFollowedUsers(followedUsers) {

@@ -10,6 +10,7 @@
         var model = this;
         model.userId = currentUser._id;
         model.publicUserId = $routeParams.publicUserId;
+        model.logout = logout;
 
         function init() {
             userService
@@ -24,6 +25,14 @@
 
         function userError(error) {
             model.error = "User not found.";
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

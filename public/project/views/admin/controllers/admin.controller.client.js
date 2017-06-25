@@ -3,8 +3,9 @@
         .module('OFM')
         .controller('adminController', adminController);
 
-    function adminController(userService,
-                                  currentUser) {
+    function adminController($location,
+                             userService,
+                             currentUser) {
 
         var model = this;
         model.userId = currentUser._id;

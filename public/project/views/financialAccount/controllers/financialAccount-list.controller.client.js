@@ -26,6 +26,7 @@
                 .findAllFinancialAccountsForUser(model.parentId)
                 .then(renderFinancialAccounts);
 
+            console.log('before first yodlee call');
             yodleeService
                 .getCOBSession()
                 .then(loadYodleeSession)
@@ -38,6 +39,7 @@
 
         function loadYodleeSession(data) {
 
+            console.log('after first yodlee call' + data.session.cobSession);
             model.cobSession = data.session.cobSession;
 
             yodleeService

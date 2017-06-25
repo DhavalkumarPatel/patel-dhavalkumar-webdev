@@ -6,41 +6,6 @@ app.get('/api/project/user/:userId/financialAccount', findAllFinancialAccountsFo
 app.get('/api/project/financialAccount/:financialAccountId', findFinancialAccountById);
 app.put('/api/project/financialAccount/:financialAccountId', isHouseHold, updateFinancialAccount);
 app.delete('/api/project/financialAccount/:financialAccountId', isHouseHold, deleteFinancialAccount);
-app.get('/api/project/yodlee/callback/:userId',yodleeCallBack);
-
-function yodleeCallBack(req, res) {
-    /*
-    if(req.query['JSONcallBackStatus']
-        && req.query['JSONcallBackStatus'] !== '') {
-
-        var jsonStr = JSON.parse(req.query['JSONcallBackStatus']);
-
-        if(jsonStr.length > 0) {
-            var financialAccount = {
-                accountName: jsonStr[0].bankName,
-                accountNumber: jsonStr[0].providerAccountId,
-                yodlee: true,
-            };
-            financialAccountModel
-                .createFinancialAccountForUser(req.params.userId, financialAccount)
-                .then(function (financialAccount) {
-                    res.json(financialAccount);
-                });
-        }
-    }
-    */
-    res.redirect('/project/#!/financialAccount');
-}
-
-function isHouseHold(req,res,next) {
-    if(req.isAuthenticated() && req.user.role === 'HOUSEHOLD')
-    {
-        next();
-    }else
-    {
-        res.sendStatus(401);
-    }
-}
 
 function createFinancialAccount(req, res) {
     var financialAccount = req.body;
@@ -85,4 +50,14 @@ function deleteFinancialAccount(req, res) {
         .then(function (status) {
             res.json(status);
         });
+}
+
+function isHouseHold(req,res,next) {
+    if(req.isAuthenticated() && req.user.role === 'HOUSEHOLD')
+    {
+        next();
+    }else
+    {
+        res.sendStatus(401);
+    }
 }

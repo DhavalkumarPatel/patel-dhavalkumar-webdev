@@ -13,16 +13,16 @@
         model.userId = currentUser._id;
         model.financialAccountId = $routeParams.financialAccountId;
 
+        model.updateFinancialAccount = updateFinancialAccount;
+        model.deleteFinancialAccount = deleteFinancialAccount;
+        model.logout = logout;
+
         function init() {
             financialAccountService
                 .findFinancialAccountById(model.financialAccountId)
                 .then(renderFinancialAccount);
         }
         init();
-
-        model.updateFinancialAccount = updateFinancialAccount;
-        model.deleteFinancialAccount = deleteFinancialAccount;
-        model.logout = logout;
 
         function renderFinancialAccount(financialAccount) {
             financialAccount.dateCreated = new Date(financialAccount.dateCreated);

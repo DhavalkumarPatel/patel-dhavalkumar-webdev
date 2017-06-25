@@ -12,8 +12,8 @@
 
         model.userId = currentUser._id;
         model.financialAccountId = $routeParams.financialAccountId;
-        model.searchTransaction = searchTransaction;
 
+        model.searchTransaction = searchTransaction;
         model.logout = logout;
 
         function init() {

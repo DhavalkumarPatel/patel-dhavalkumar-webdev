@@ -10,14 +10,13 @@
         var model = this;
         model.userId = currentUser._id;
 
+        model.updateUser = updateUser;
+        model.logout = logout;
+
         function init() {
             renderUser(currentUser);
         }
-
         init();
-
-        model.updateUser = updateUser;
-        model.logout = logout;
 
         function updateUser(user) {
             userService

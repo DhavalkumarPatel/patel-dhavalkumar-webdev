@@ -9,7 +9,6 @@
                                             financialAccountService,
                                            userService) {
         var model = this;
-
         model.userId = currentUser._id;
 
         model.createFinancialAccount = createFinancialAccount;

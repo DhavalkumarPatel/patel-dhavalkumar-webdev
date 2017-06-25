@@ -10,15 +10,16 @@
 
         var model = this;
         model.userId = currentUser._id;
+
+        model.updateProfile = updateProfile;
+        model.logout = logout;
+        model.unregister = unregister;
+
         function init() {
             renderUser(currentUser);
 
         }
         init();
-
-        model.updateProfile = updateProfile;
-        model.logout = logout;
-        model.unregister = unregister;
 
         function updateProfile(user) {
             userService

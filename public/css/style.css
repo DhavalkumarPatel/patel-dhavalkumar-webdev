@@ -2234,6 +2234,12 @@ textarea {
 	z-index: 1;
 }
 
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+	color: #262626;
+	text-decoration: none;
+	background: transparent;
+}
+
 .minHeight {
 	min-height:750px;
 }

@@ -14,16 +14,16 @@
         model.transactionId = $routeParams.transactionId;
         model.financialAccountId = $routeParams.financialAccountId;
 
+        model.updateTransaction = updateTransaction;
+        model.deleteTransaction = deleteTransaction;
+        model.logout = logout;
+
         function init() {
             transactionService
                 .findTransactionById(model.transactionId)
                 .then(renderTransaction);
         }
         init();
-
-        model.updateTransaction = updateTransaction;
-        model.deleteTransaction = deleteTransaction;
-        model.logout = logout;
 
         function renderTransaction(transaction) {
             transaction.dateCreated = new Date(transaction.dateCreated);

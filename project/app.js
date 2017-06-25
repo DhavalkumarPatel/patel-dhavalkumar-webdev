@@ -14,3 +14,4 @@ require('./services/user.service.server');
 require('./services/followUser.service.server');
 require('./services/financialAccount.service.server');
 require('./services/transaction.service.server');
+require('./services/yodlee.service.server');

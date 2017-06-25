@@ -28,8 +28,10 @@
                 .then(renderFinancialAccounts);
 
             yodleeService
-                .getCOBSession()
-                .then(loadYodleeSession)
+                .getAccounts()
+                .then(function (data) {
+                    model.yodleeAccounts = data.account;
+                })
         }
         init();
 
@@ -54,23 +56,6 @@
                 });
 
             model.map = map;
-        }
-
-        function loadYodleeSession(data) {
-
-            model.cobSession = data.session.cobSession;
-
-            yodleeService
-                .getUserSession(model.cobSession)
-                .then(function (data) {
-                    model.userSession = data.user.session.userSession;
-
-                    yodleeService
-                        .getAccounts(model.cobSession, model.userSession)
-                        .then(function (data) {
-                            model.yodleeAccounts = data.account;
-                        })
-                })
         }
 
         function logout() {

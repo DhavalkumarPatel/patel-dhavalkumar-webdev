@@ -16,32 +16,13 @@
         model.logout = logout;
 
         function init() {
-            loadYodleeTransactions();
+            getTransaction();
         }
         init();
 
-        function loadYodleeTransactions() {
-            if(!(model.cobSession && model.userSession)) {
-                yodleeService
-                    .getCOBSession()
-                    .then(function (data) {
-                        model.cobSession = data.session.cobSession;
-
-                        yodleeService
-                            .getUserSession(model.cobSession)
-                            .then(function (data) {
-                                model.userSession = data.user.session.userSession;
-                                getTransaction();
-                            })
-                    });
-            } else {
-                getTransaction();
-            }
-        }
-
         function getTransaction() {
             yodleeService
-                .getTransactions(model.cobSession, model.userSession, model.financialAccountId, '')
+                .getTransactions(model.financialAccountId, '')
                 .then(renderTransactions);
         }
 

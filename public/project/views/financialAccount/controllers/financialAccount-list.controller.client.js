@@ -26,7 +26,6 @@
                 .findAllFinancialAccountsForUser(model.parentId)
                 .then(renderFinancialAccounts);
 
-            console.log('before first yodlee call');
             yodleeService
                 .getCOBSession()
                 .then(loadYodleeSession)
@@ -39,34 +38,33 @@
 
         function loadYodleeSession(data) {
 
-            console.log('after first yodlee call' + data.session.cobSession);
-            model.cobSession = data.session.cobSession;
+            model.cobSession = data.COB_SESSION;
 
             yodleeService
-                .getUserSession(model.cobSession)
+                .getUserSession()
                 .then(function (data) {
-                    model.userSession = data.user.session.userSession;
+                    model.userSession = data.USER_SESSION;
 
                     yodleeService
-                        .getAccounts(model.cobSession, model.userSession)
+                        .getAccounts()
                         .then(function (data) {
                             model.yodleeAccounts = data.account;
                         })
 
                     yodleeService
-                        .getFastLinkToken(model.cobSession, model.userSession)
+                        .getFastLinkToken()
                         .then(function (data) {
-                            model.apiToken = data.user.accessTokens[0].value;
+                            model.apiToken = data.FAST_LINK_TOKEN;
                         })
                 })
         }
 
         function deleteYodleeAccount(accountId) {
             yodleeService
-                .deleteAccount(model.cobSession, model.userSession, accountId)
+                .deleteAccount(accountId)
                 .then(function (data) {
                     yodleeService
-                        .getAccounts(model.cobSession, model.userSession)
+                        .getAccounts()
                         .then(function (data) {
                             model.yodleeAccounts = data.account;
                         })

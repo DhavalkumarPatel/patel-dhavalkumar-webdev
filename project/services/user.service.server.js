@@ -63,7 +63,7 @@ app.get ('/auth/project/facebook',
     passport.authenticate('facebook', {
         scope : 'email' }));
 
-app.get('/auth/project/facebook/callback',
+app.get('/auth/project2/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/project/#!/profile',
         failureRedirect: '/project/#!/login'

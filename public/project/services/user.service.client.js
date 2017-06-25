@@ -27,7 +27,8 @@
             updateProfile: updateProfile,
             createFamilyMember: createFamilyMember,
             updateFamilyMember: updateFamilyMember,
-            deleteFamilyMember: deleteFamilyMember
+            deleteFamilyMember: deleteFamilyMember,
+            getHomePageStatistics: getHomePageStatistics
         };
         return api;
 
@@ -205,6 +206,14 @@
         function deleteFamilyMember(userId) {
             var url = "/api/project/familyMember/"+userId;
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function getHomePageStatistics() {
+            var url = "/api/project/home/stats";
+            return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });

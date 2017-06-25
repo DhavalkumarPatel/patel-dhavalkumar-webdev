@@ -11,6 +11,15 @@
         model.currentUser = currentUser;
         model.logout = logout;
 
+        function init() {
+            userService
+                .getHomePageStatistics()
+                .then(function (data) {
+                    model.data = data;
+                })
+        }
+        init();
+
         function logout() {
             userService
                 .logout()

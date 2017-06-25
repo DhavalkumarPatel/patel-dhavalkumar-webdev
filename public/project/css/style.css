@@ -40,12 +40,7 @@ body {
     }
 }
 
-.navbar-default {
-    background-color: #4f4f4f;
-    border-color: #4f4f4f;
-}
-
-.navbar-default .navbar-brand {
+.navbar-inverse .navbar-brand {
     color: white;
 }
 
@@ -53,7 +48,7 @@ body {
     width: 100%;
 }
 
-.navbar-default .navbar-link {
+.navbar-inverse .navbar-link {
     color: white;
 }
 
@@ -61,7 +56,7 @@ body {
     color: white;
 }
 
-.navbar.navbar-default a {
+.navbar.navbar-inverse a {
     color: #ffffff;
 }
 

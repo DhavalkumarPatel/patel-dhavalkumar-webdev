@@ -47,6 +47,7 @@ app.post('/api/project/logout', logout);
 app.post('/api/project/register', register);
 app.post('/api/project/unregister', unregister);
 app.put('/api/project/updateProfile/:userId', updateProfile);
+app.get('/api/project/home/stats', getHomePageStatistics);
 
 app.get('/auth/project/google',
     passport.authenticate('google', {
@@ -401,5 +402,20 @@ function updateProfile(req, res) {
         .updateUser(req.params.userId, user)
         .then(function (status) {
             res.send(status);
+        });
+}
+
+function getHomePageStatistics(req, res) {
+    var stats = {};
+    userModel
+        .findAllUsers()
+        .then(function (users) {
+            stats['totalUsers'] = users.length;
+            userModel
+                .findAllUsersForRole("HOUSEHOLD")
+                .then(function (users) {
+                    stats['totalFamilies'] = users.length;
+                    res.json(stats);
+                })
         });
 }

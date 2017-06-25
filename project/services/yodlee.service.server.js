@@ -1,7 +1,4 @@
-var q = require('q');
 const app = require('../../express');
-const https = require('https');
-const querystring = require('querystring');
 var request = require('request');
 
 app.get('/api/project/yodlee/callback/:userId',yodleeCallBack);

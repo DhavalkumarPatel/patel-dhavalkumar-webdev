@@ -21,8 +21,8 @@ function loadCOBSession() {
 
     var  cobrandParam = {
         "cobrand":      {
-            "cobrandLogin": "sbCobdspatel28",
-            "cobrandPassword": "5162ecae-9446-4fa0-adda-6a1a01d45da4",
+            "cobrandLogin": process.env.YODLEE_COBRAND_LOGIN,
+            "cobrandPassword": process.env.YODLEE_COBRAND_PASSWORD,
             "locale": "en_US"
         }
     };
@@ -51,8 +51,8 @@ function loadUserSession(cobSession) {
 
     var userParam = {
         "user":      {
-            "loginName": "sbMemdspatel281",
-            "password": "sbMemdspatel281#123",
+            "loginName": process.env.YODLEE_USER_LOGIN,
+            "password": process.env.YODLEE_USER_PASSWORD,
             "locale": "en_US"
         }
     };
@@ -148,8 +148,8 @@ function deleteAccount(req, res) {
 
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            res.json(body);
         }
+        res.send(200);
     });
 }
 

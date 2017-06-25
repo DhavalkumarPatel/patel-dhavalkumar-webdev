@@ -12,8 +12,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="#!/">Home</a></li>
                 <!--<li><a href="#!/">Admin</a></li>-->
-                <li ng-show="!model.currentUser._id" class="active"><a href="#!/login">Login</a></li>
-                <li ng-show="!model.currentUser._id"><a href="#!/register">Register</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.currentUser._id" class="active"><a href="#!/register">Register</a></li>
                 <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
                 <li><a target="_blank" href="https://github.com/DhavalkumarPatel/patel-dhavalkumar-webdev">GitHub</a></li>
                 <li><a target="_blank" href="https://youtu.be/A3B7mifHMhM?list=PL_GGiAMracOXEpxjhLR9Kbd5ZS8Ob6buZ">Demo</a></li>
@@ -25,7 +25,6 @@
 </nav>
 
 <div class="container-fluid">
-<h1>Register</h1>
 
     <div ng-show="model.error"
          class="alert alert-danger">

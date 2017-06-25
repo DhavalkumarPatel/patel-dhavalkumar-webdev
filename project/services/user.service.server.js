@@ -35,6 +35,7 @@ app.delete('/api/project/familyMember/:userId',isHouseHold, deleteFamilyMember);
 
 app.get('/api/project/user/:userId', findUserById);
 app.get('/api/project/user',findAllUsers);
+app.get('/api/project/user/role/:roleName',findAllUsersForRole);
 app.get('/api/project/user/public/:userId', findRestrictedUserDetailsById);
 app.get('/api/project/familyMember/:userId', findAllFamilyMembers);
 app.post('/api/project/login', passport.authenticate('local'), login);
@@ -133,6 +134,14 @@ function findAllUsers(req, res) {
                 res.json(users);
             });
     }
+}
+
+function findAllUsersForRole(req, res) {
+    userModel
+        .findAllUsersForRole(req.params.roleName)
+        .then(function (users) {
+            res.json(users);
+        });
 }
 
 function findAllFamilyMembers(req, res) {

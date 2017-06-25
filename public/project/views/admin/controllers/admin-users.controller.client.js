@@ -21,6 +21,7 @@
         init();
 
         function findAllusers() {
+            model.error= null;
             userService
                 .findAllUsers()
                 .then(function (users) {
@@ -36,12 +37,17 @@
         }
 
         function deleteUser(user) {
+            model.error= null;
             userService
                 .deleteUser(user._id)
                 .then(findAllusers);
         }
 
         function createUser(user) {
+            if(!user.username) {
+                model.error = "Username is required to create a new user."
+                return;
+            }
 
             userService
                 .findUserByUsername(user.username)
@@ -61,6 +67,7 @@
         }
 
         function updateUser(user) {
+            model.error= null;
             userService
                 .updateUser(user._id, user)
                 .then(findAllusers);

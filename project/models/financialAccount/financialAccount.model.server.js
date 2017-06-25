@@ -31,7 +31,10 @@ function findAllFinancialAccountsForUser(userId) {
 }
 
 function findAllFinancialAccounts() {
-    return financialAccountModel.find();
+    return financialAccountModel
+        .find()
+        .populate('_user')
+        .exec();
 }
 
 function updateFinancialAccount(financialAccountId, financialAccount) {

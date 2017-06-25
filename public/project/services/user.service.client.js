@@ -12,6 +12,7 @@
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             findAllUsers : findAllUsers,
+            findAllUsersForRole : findAllUsersForRole,
             findAllFamilyMembers : findAllFamilyMembers,
             updateUser: updateUser,
             deleteUser: deleteUser,
@@ -72,6 +73,14 @@
         
         function findAllUsers() {
             var url = "/api/project/user";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findAllUsersForRole(roleName) {
+            var url = "/api/project/user/role/" + roleName;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

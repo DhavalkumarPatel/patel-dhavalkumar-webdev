@@ -5,6 +5,7 @@ var userModel = mongoose.model('OFM_UserModel', userSchema);
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
 userModel.findAllUsers = findAllUsers;
+userModel.findAllUsersForRole = findAllUsersForRole;
 userModel.findAllFamilyMembers = findAllFamilyMembers;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
@@ -33,6 +34,12 @@ function findRestrictedUserDetailsById(userId) {
 
 function findAllUsers() {
     return userModel.find();
+}
+
+
+function findAllUsersForRole(role) {
+    return userModel
+        .find({role: role});
 }
 
 function findAllFamilyMembers(userId) {

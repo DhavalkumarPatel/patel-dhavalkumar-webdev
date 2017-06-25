@@ -37,10 +37,6 @@
             {{model.error}}
         </div>
 
-        <div ng-show="(myForm.username.$touched || submitted) && myForm.username.$invalid" class="alert alert-danger">
-            Username is required.
-        </div>
-
         <ul class="list-group">
             <li class="list-group-item active">
                 <div class="row">
@@ -71,8 +67,6 @@
                                placeholder="Username"/>
                         <input ng-model="model.user.username"
                                ng-hide="model.user._id"
-                               name="username"
-                               required
                                autocorrect="off"
                                autocapitalize="none"
                                class="form-control"
@@ -96,9 +90,9 @@
                         </select>
                     </div>
                     <div class="col-sm-2 col-xs-5">
-                        <span ng-click="model.updateFamilyMember(model.user);model.user={role:'FAMILY-MEMBER'};submitted=false;myForm.username.$touched=false"
+                        <span ng-click="model.updateFamilyMember(model.user);model.user={role:'FAMILY-MEMBER'};"
                               ng-show="model.user._id" class="btn btn-success glyphicon glyphicon-ok pull-right"></span>
-                        <span ng-click="myForm.username.$invalid ? submitted=true : model.createFamilyMember(model.user);model.user={role:'FAMILY-MEMBER'};submitted=false;myForm.username.$touched=false"
+                        <span ng-click="model.createFamilyMember(model.user);model.user={role:'FAMILY-MEMBER'};"
                               ng-hide="model.user._id" class="btn btn-success glyphicon glyphicon-plus pull-right"></span>
                     </div>
                 </div>

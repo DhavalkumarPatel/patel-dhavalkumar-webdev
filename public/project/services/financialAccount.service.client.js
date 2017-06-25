@@ -10,6 +10,16 @@
         this.findFinancialAccountById = findFinancialAccountById;
         this.updateFinancialAccount = updateFinancialAccount;
         this.deleteFinancialAccount = deleteFinancialAccount;
+        this.findAllFinancialAccounts = findAllFinancialAccounts;
+
+        function findAllFinancialAccounts() {
+
+            var url ="/api/project/financialAccounts";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function createFinancialAccount(userId, financialAccount) {
             var url = "/api/project/user/" + userId + "/financialAccount";

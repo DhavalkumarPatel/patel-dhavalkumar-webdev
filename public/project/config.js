@@ -39,6 +39,14 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/financialAccount', {
+                templateUrl: 'views/admin/templates/admin-financialAccount.view.client.html',
+                controller: 'adminFinancialAccountsController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',

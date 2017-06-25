@@ -23,7 +23,7 @@
 
         function findAllFamilyMembers() {
             var houseHoldId;
-
+            model.error= null;
             if(currentUser.role === 'HOUSEHOLD') {
                 houseHoldId = currentUser._id;
             } else {
@@ -47,12 +47,17 @@
         }
 
         function deleteFamilyMember(user) {
+            model.error= null;
             userService
                 .deleteFamilyMember(user._id)
                 .then(findAllFamilyMembers);
         }
 
         function createFamilyMember(user) {
+            if(!user.username) {
+                model.error = "Username is required to create a new family member."
+                return;
+            }
             userService
                 .findUserByUsername(user.username)
                 .then(
@@ -72,6 +77,7 @@
         }
 
         function updateFamilyMember(user) {
+            model.error= null;
             userService
                 .updateFamilyMember(user._id, user)
                 .then(findAllFamilyMembers);

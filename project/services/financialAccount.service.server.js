@@ -1,11 +1,20 @@
 const app = require('../../express');
 var financialAccountModel = require('../models/financialAccount/financialAccount.model.server');
 
-app.post('/api/project/user/:userId/financialAccount', isHouseHold, createFinancialAccount);
+app.get('/api/project/financialAccounts',isAdmin,findAllFinancialAccounts);
+app.post('/api/project/user/:userId/financialAccount', isHouseHoldOrAdmin, createFinancialAccount);
 app.get('/api/project/user/:userId/financialAccount', findAllFinancialAccountsForUser);
 app.get('/api/project/financialAccount/:financialAccountId', findFinancialAccountById);
-app.put('/api/project/financialAccount/:financialAccountId', isHouseHold, updateFinancialAccount);
-app.delete('/api/project/financialAccount/:financialAccountId', isHouseHold, deleteFinancialAccount);
+app.put('/api/project/financialAccount/:financialAccountId', isHouseHoldOrAdmin, updateFinancialAccount);
+app.delete('/api/project/financialAccount/:financialAccountId', isHouseHoldOrAdmin, deleteFinancialAccount);
+
+function findAllFinancialAccounts(req, res) {
+    financialAccountModel
+        .findAllFinancialAccounts()
+        .then(function (accounts) {
+            res.json(accounts);
+        });
+}
 
 function createFinancialAccount(req, res) {
     var financialAccount = req.body;
@@ -52,8 +61,18 @@ function deleteFinancialAccount(req, res) {
         });
 }
 
-function isHouseHold(req,res,next) {
-    if(req.isAuthenticated() && req.user.role === 'HOUSEHOLD')
+function isHouseHoldOrAdmin(req,res,next) {
+    if(req.isAuthenticated() && (req.user.role === 'HOUSEHOLD' || req.user.role === 'ADMIN'))
+    {
+        next();
+    }else
+    {
+        res.sendStatus(401);
+    }
+}
+
+function isAdmin(req,res,next) {
+    if(req.isAuthenticated() && req.user.role === 'ADMIN')
     {
         next();
     }else

@@ -1,15 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-
             <p class="navbar-text pull-left">
-                <a href="#!/familyMember"
+                <a href="#!/financialAccount/{{model.financialAccountId}}/yodleeTransaction"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
             <a class="navbar-brand">
-                Profile of {{model.publicUser.firstName}}
+                Yodlee Transaction
             </a>
             <p class="navbar-text pull-right">
                 <a href="#!/"
@@ -25,75 +24,66 @@
         </div>
     </div>
 </nav>
+
 <div class="container-fluid">
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
-                    <b>First Name:</b>
+                    <b>Transaction Date</b>
                 </div>
                 <div class="col-xs-6">
-                    {{model.publicUser.firstName}}
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-6">
-                    <b>Last Name</b>
-                </div>
-                <div class="col-xs-6">
-                    {{model.publicUser.lastName}}
+                    {{model.transaction.transactionDate | date}}
                 </div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
-                    <b> Email Address</b>
+                    <b>Category</b>
                 </div>
                 <div class="col-xs-6">
-                    {{model.publicUser.email}}
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-6">
-                    <b>Phone</b>
-                </div>
-                <div class="col-xs-6">
-                    {{model.publicUser.phone}}
+                    {{model.transaction.category}}
                 </div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
-                    <b>Date of Birth</b>
+                    <b>Type</b>
                 </div>
                 <div class="col-xs-6">
-                    {{model.publicUser.dob | date}}
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-6">
-                    <b>Address</b>
-                </div>
-                <div class="col-xs-6">
-                    {{model.publicUser.address}}
+                    {{model.transaction.baseType}}
                 </div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
-                    <b>Account Creation Date</b>
+                    <b>Amount</b>
                 </div>
                 <div class="col-xs-6">
-                    {{model.publicUser.dateCreated | date}}
+                    ${{model.transaction.amount.amount}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>Description</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.transaction.description.original}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+                    <b>Merchant Name</b>
+                </div>
+                <div class="col-xs-6">
+                    {{model.transaction.merchant.name}}
                 </div>
             </div>
         </li>

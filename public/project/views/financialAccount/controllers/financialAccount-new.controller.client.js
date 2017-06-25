@@ -12,22 +12,11 @@
 
         model.userId = currentUser._id;
 
-        function init() {
-            financialAccountService
-                .findAllFinancialAccountsForUser(model.userId)
-                .then(renderFinancialAccounts);
-        }
-        init();
-
         model.createFinancialAccount = createFinancialAccount;
         model.logout = logout;
 
-        function renderFinancialAccounts(financialAccounts) {
-            model.financialAccounts = financialAccounts;
-        }
-
         function createFinancialAccount(financialAccount) {
-
+            financialAccount.yodlee = false;
             financialAccountService
                 .createFinancialAccount(model.userId, financialAccount)
                 .then(function (financialAccount) {

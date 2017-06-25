@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('OFM', ['ngRoute', 'textAngular']);
+        .module('OFM', ['ngRoute']);
 })();

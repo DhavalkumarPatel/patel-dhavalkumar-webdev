@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var financialAccountSchema = require('./financialAccount.schema.server');
-var financialAccountModel = mongoose.model('FinancialAccountModel', financialAccountSchema);
+var financialAccountModel = mongoose.model('OFM_FinancialAccountModel', financialAccountSchema);
 var userModel = require('../user/user.model.server');
 
 financialAccountModel.createFinancialAccountForUser = createFinancialAccountForUser;

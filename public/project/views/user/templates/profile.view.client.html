@@ -6,7 +6,7 @@
             </a>
             <p class="navbar-text pull-right">
                 <a href="#!/"
-                   class="navbar-link" style="margin-right: 15px" title="Home">
+                   class="navbar-link margin-right" title="Home">
                     <span class="glyphicon glyphicon-home"></span>
                 </a>
 
@@ -131,10 +131,14 @@
             Users You Follow
         </a>
 
-        <a ng-show="model.user._id && model.user.role === 'HOUSEHOLD'"
-           class="btn btn-primary btn-block"
+        <a class="btn btn-primary btn-block"
            href="#!/financialAccount">
             Financial Accounts
+        </a>
+
+        <a class="btn btn-primary btn-block"
+           href="#!/balance">
+            View Balance
         </a>
 
         <a class="btn btn-primary btn-block"

@@ -1,0 +1,155 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/financialAccount"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Yodlee Transactions
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/"
+                           class="navbar-link margin-right" title="Home">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+
+                        <a ng-click="model.logout()"
+                           class="navbar-link" title="Logout">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+
+    <form name="myForm">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group" ng-class="{ 'has-error' : (!myForm.dateFrom.$pristine || submitted) && myForm.dateFrom.$invalid }">
+                    <label for="dateFrom">
+                        From Date
+                    </label>
+                    <input ng-model="model.search.dateFrom"
+                           type="date"
+                           class="form-control"
+                           id="dateFrom"
+                           name="dateFrom">
+                    <div ng-show="(!myForm.dateFrom.$pristine || submitted) && myForm.dateFrom.$invalid" class="help-block">
+                        Enter a valid From Date.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group" ng-class="{ 'has-error' : (!myForm.dateTo.$pristine || submitted) && myForm.dateTo.$invalid }">
+                    <label for="dateTo">
+                        To Date
+                    </label>
+                    <input ng-model="model.search.dateTo"
+                           type="date"
+                           class="form-control"
+                           id="dateTo"
+                           name="dateTo">
+                    <div ng-show="(!myForm.dateTo.$pristine || submitted) && myForm.dateTo.$invalid" class="help-block">
+                        Enter a valid To Date.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <label for="category">Category</label>
+                <select id="category"
+                        name="category"
+                        ng-model="model.search.category"
+                        class="form-control"
+                        ng-init="model.search.category='0'">
+                    <option value="0">All</option>
+                    <option value="2">Automotive/Fuel</option>
+                    <option value="15">Cable/Satellite/Telecom</option>
+                    <option value="3">Charitable Giving</option>
+                    <option value="26">Credit Card Payments</option>
+                    <option value="6">Education</option>
+                    <option value="7">Entertainment/Recreation</option>
+                    <option value="10">Groceries</option>
+                    <option value="11">Healthcare/Medical</option>
+                    <option value="13">Home Improvement</option>
+                    <option value="14">Insurance</option>
+                    <option value="18">Mortgage</option>
+                    <option value="19">Other Expenses</option>
+                    <option value="21">Rent</option>
+                    <option value="22">Restaurants</option>
+                    <option value="29">Salary/Regular Income</option>
+                    <option value="16">Services/Supplies</option>
+                    <option value="23">Travel</option>
+                    <option value="39">Utilities</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 bottom-margin">
+                <a ng-click="(myForm.dateFrom.$invalid || myForm.dateTo.$invalid) ? submitted=true : model.searchTransaction(model.search)">
+                    <span class="btn btn-success btn-block">Search</span>
+                </a>
+            </div>
+        </div>
+
+        <div ng-show="model.transactions && model.transactions.length>0" class="top-margin">
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-xs-7">
+                            Date
+                        </div>
+                        <div class="col-md-3 col-sm-4 hidden-xs">
+                            Category
+                        </div>
+                        <div class="col-md-3 hidden-sm hidden-xs">
+                            Description
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-5">
+                            <div class="pull-right">
+                                Amount
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li ng-repeat="transaction in model.transactions"
+                    class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-xs-7">
+                            <a href="#!/financialAccount/{{model.financialAccountId}}/yodleeTransaction/{{transaction.id}}">
+                                {{transaction.transactionDate | date}}
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-4 hidden-xs">
+                            {{transaction.category}}
+                        </div>
+                        <div class="col-md-3 hidden-sm hidden-xs">
+                            {{transaction.description.simple}}
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-5">
+                            <div class="pull-right">
+                                <div ng-show="transaction.baseType==='DEBIT'" class="pull-right">-{{transaction.amount.amount}}$</div>
+                                <div ng-hide="transaction.baseType==='DEBIT'" class="pull-right">{{transaction.amount.amount}}$</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </form>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

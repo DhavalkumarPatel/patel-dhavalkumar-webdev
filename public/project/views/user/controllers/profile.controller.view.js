@@ -7,10 +7,12 @@
                                $routeParams,
                                currentUser,
                                userService) {
+
         var model = this;
         model.userId = currentUser._id;
         function init() {
             renderUser(currentUser);
+
         }
         init();
 

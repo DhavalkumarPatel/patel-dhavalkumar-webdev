@@ -1,0 +1,135 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/financialAccount/{{model.financialAccountId}}/transaction"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand">
+                New Transaction
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/"
+                   class="navbar-link margin-right" title="Home">
+                    <span class="glyphicon glyphicon-home"></span>
+                </a>
+
+                <a ng-click="model.logout()"
+                   class="navbar-link" title="Logout">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+
+    <form name="myForm">
+
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type"
+                    name="type"
+                    ng-model="transaction.type"
+                    required
+                    class="form-control"
+                    ng-init="transaction.type='CREDIT'">
+                <option value="CREDIT">Credit</option>
+                <option value="DEBIT">Debit</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category"
+                    name="category"
+                    ng-model="transaction.category"
+                    required
+                    class="form-control"
+                    ng-init="transaction.category='Other Expenses'">
+                <option value="Automotive/Fuel">Automotive/Fuel</option>
+                <option value="Cable/Satellite/Telecom">Cable/Satellite/Telecom</option>
+                <option value="Charitable Giving">Charitable Giving</option>
+                <option value="Credit Card Payments">Credit Card Payments</option>
+                <option value="Education">Education</option>
+                <option value="Entertainment/Recreation">Entertainment/Recreation</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Healthcare/Medical">Healthcare/Medical</option>
+                <option value="Home Improvement">Home Improvement</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Mortgage">Mortgage</option>
+                <option value="Other Expenses">Other Expenses</option>
+                <option value="Rent">Rent</option>
+                <option value="Restaurants">Restaurants</option>
+                <option value="Salary/Regular Income">Salary/Regular Income</option>
+                <option value="Services/Supplies">Services/Supplies</option>
+                <option value="Travel">Travel</option>
+                <option value="Utilities">Utilities</option>
+            </select>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.description.$touched || submitted) && myForm.description.$invalid }">
+            <label for="description">Description</label>
+            <input class="form-control"
+                   type="text"
+                   ng-model="transaction.description"
+                   placeholder="Description"
+                   id="description"
+                   name="description"
+                   required/>
+            <div ng-show="(myForm.description.$touched || submitted) && myForm.description.$invalid" class="help-block">
+                Transaction Description is required.
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : (myForm.amount.$touched || submitted) && myForm.amount.$invalid }">
+            <label for="amount">Amount</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input class="form-control"
+                       type="number"
+                       ng-model="transaction.amount"
+                       placeholder="Amount"
+                       id="amount"
+                       name="amount"
+                       required/>
+            </div>
+            <div ng-show="(myForm.amount.$touched || submitted) && myForm.amount.$invalid" class="help-block">
+                Transaction Amount is required.
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : (!myForm.dateCreated.$pristine || submitted) && myForm.dateCreated.$invalid }">
+            <label for="dateCreated">
+                Transaction Date
+            </label>
+            <input ng-model="transaction.dateCreated"
+                   type="date"
+                   class="form-control"
+                   required
+                   id="dateCreated"
+                   name="dateCreated">
+            <div ng-show="(!myForm.dateCreated.$pristine || submitted) && myForm.dateCreated.$invalid" class="help-block">
+                Enter a valid Transaction Date.
+            </div>
+        </div>
+
+        <a ng-click="(myForm.description.$invalid || myForm.amount.$invalid || myForm.dateCreated.$invalid) ? submitted=true : model.createTransaction(transaction)"
+           class="btn btn-block btn-success">
+            Create
+        </a>
+
+    </form>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
+

@@ -91,7 +91,7 @@ function isHouseHold(req,res,next) {
 function createUser(req, res) {
     var user = req.body;
     if(!user.password) {
-        user.password = 'password';
+        user.password = user.username;
     }
     user.password = bcrypt.hashSync(user.password);
     userModel
@@ -354,7 +354,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
 function createFamilyMember(req, res) {
     var user = req.body;
     if(!user.password) {
-        user.password = 'password';
+        user.password = user.username;
     }
     user.password = bcrypt.hashSync(user.password);
     user.role = 'FAMILY-MEMBER';

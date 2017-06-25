@@ -15,10 +15,6 @@
 
         function init() {
             financialAccountService
-                .findAllFinancialAccountsForUser(model.userId)
-                .then(renderFinancialAccounts);
-
-            financialAccountService
                 .findFinancialAccountById(model.financialAccountId)
                 .then(renderFinancialAccount);
         }
@@ -28,11 +24,8 @@
         model.deleteFinancialAccount = deleteFinancialAccount;
         model.logout = logout;
 
-        function renderFinancialAccounts(financialAccounts) {
-            model.financialAccounts = financialAccounts;
-        }
-
         function renderFinancialAccount(financialAccount) {
+            financialAccount.dateCreated = new Date(financialAccount.dateCreated);
             model.financialAccount = financialAccount;
         }
 

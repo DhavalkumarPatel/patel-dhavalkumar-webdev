@@ -14,7 +14,7 @@
                     </a>
                     <p class="navbar-text pull-right">
                         <a href="#!/"
-                           class="navbar-link" style="margin-right: 15px" title="Home">
+                           class="navbar-link margin-right" title="Home">
                             <span class="glyphicon glyphicon-home"></span>
                         </a>
 
@@ -30,9 +30,115 @@
 </nav>
 
 <div class="container-fluid">
-    <div ng-include="'views/financialAccount/templates/financialAccount-list-common.view.client.html'">
+    <label>Local Financial Accounts</label>
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-lg-4 col-md-7 col-xs-10">
+                    Account Name
+                </div>
+                <div class="col-lg-3 visible-lg">
+                    Account Number
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Opening Date
+                </div>
+                <div class="col-xs-2">
+                    <a href="#!/financialAccount/new" class="colorWhite" ng-show="model.user.role==='HOUSEHOLD'">
+                        <span class="glyphicon glyphicon-plus pull-right"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
 
-    </div>
+        <li ng-repeat="financialAccount in model.financialAccounts"
+            class="list-group-item">
+            <div class="row">
+                <div class="col-lg-4 col-md-7 col-xs-10">
+                    <a href="#!/financialAccount/{{financialAccount._id}}/transaction">
+                        {{financialAccount.accountName}}
+                    </a>
+                </div>
+                <div class="col-lg-3 visible-lg">
+                    {{financialAccount.accountNumber}}
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    {{financialAccount.dateCreated | date}}
+                </div>
+                <div class="col-xs-2">
+                    <a href="#!/financialAccount/{{financialAccount._id}}"
+                       ng-show="model.user.role==='HOUSEHOLD'">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href="#!/financialAccount/{{financialAccount._id}}/transaction"
+                       ng-show="model.user.role==='FAMILY-MEMBER'">
+                        <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                    </a>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <label>Financial Accounts Linked from Yodlee</label>
+
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-lg-4 col-md-7 col-xs-10">
+                    Account Name
+                </div>
+                <div class="col-lg-3 visible-lg">
+                    Account Number
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Added Date
+                </div>
+                <div class="col-xs-2">
+                    <form action="https://node.developer.yodlee.com/authenticate/restserver/" method="POST">
+                        <input type="text" name="app" value="10003600" ng-hide="true"/>
+                        <input type="text" name="rsession" ng-model="model.userSession" ng-hide="true"/>
+                        <input type="text" name="token" ng-model="model.apiToken" ng-hide="true"/>
+                        <input type="text" name="redirectReq" value="true" ng-hide="true"/>
+                        <input type="text" name="extraParams" value="callback=https://finance-manegement.herokuapp.com/api/project/yodlee/callback/{{model.userId}}" ng-hide="true"/>
+                        <button type="submit" ng-show="model.userSession && model.apiToken && model.user.role==='HOUSEHOLD'" name="submit" class="pull-right colorWhite submit-button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="yodleeAccount in model.yodleeAccounts"
+            ng-if="yodleeAccount.CONTAINER!=='reward'"
+            class="list-group-item">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-7 col-xs-10">
+                    <a href="#!/financialAccount/{{yodleeAccount.id}}/yodleeTransaction">
+                        {{yodleeAccount.providerName}}
+                    </a>
+                </div>
+                <div class="col-lg-3 visible-lg">
+                    {{yodleeAccount.accountNumber}}
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    {{yodleeAccount.createdDate | date}}
+                </div>
+                <div class="col-xs-2">
+                    <a ng-click="model.deleteYodleeAccount(yodleeAccount.id)" ng-show="model.user.role==='HOUSEHOLD'">
+                        <span class="glyphicon glyphicon-remove pull-right"></span>
+                    </a>
+
+                    <a href="#!/financialAccount/{{yodleeAccount.id}}/yodleeTransaction" ng-show="model.user.role==='FAMILY-MEMBER'">
+                        <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                    </a>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

@@ -9,7 +9,7 @@
                                userService) {
         var model = this;
         model.userId = currentUser._id;
-        model.publicUserId =   model.websiteId = $routeParams.publicUserId;
+        model.publicUserId = $routeParams.publicUserId;
 
         function init() {
             userService

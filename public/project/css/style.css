@@ -18,6 +18,16 @@ div.btn-group {
     margin-bottom: 5px;
 }
 
+.margin-right {
+    margin-right: 15px
+}
+
+.submit-button {
+    background: transparent;
+    padding: 0px;
+    border: none;
+}
+
 body {
     padding-top: 60px;
     padding-bottom: 60px;

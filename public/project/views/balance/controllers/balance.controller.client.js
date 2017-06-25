@@ -1,21 +1,22 @@
 (function () {
     angular
         .module('OFM')
-        .controller('financialAccountListController', financialAccountListController);
+        .controller('balanceController', balanceController);
     
-    function financialAccountListController($routeParams,
-                                            currentUser,
-                                            $location,
-                                            financialAccountService,
-                                            userService,
-                                            yodleeService) {
+    function balanceController($routeParams,
+                               currentUser,
+                               $location,
+                               financialAccountService,
+                               transactionService,
+                               userService,
+                               yodleeService) {
+
         var model = this;
 
         model.user = currentUser;
         model.userId = currentUser._id;
         model.parentId = currentUser._id;
         model.logout = logout;
-        model.deleteYodleeAccount = deleteYodleeAccount;
 
         function init() {
 
@@ -34,6 +35,25 @@
 
         function renderFinancialAccounts(financialAccounts) {
             model.financialAccounts = financialAccounts;
+            var map = new Object();
+
+            for(var i in financialAccounts) {
+                map[financialAccounts[i]._id.toString()] = 0;
+            }
+
+            transactionService
+                .findAllTransactionsForUser(model.parentId)
+                .then(function (transactions) {
+                    for (var j in transactions) {
+                        if (transactions[j].type === 'CREDIT') {
+                            map[transactions[j]._account] += transactions[j].amount;
+                        } else {
+                            map[transactions[j]._account] -= transactions[j].amount;
+                        }
+                    }
+                });
+
+            model.map = map;
         }
 
         function loadYodleeSession(data) {
@@ -45,24 +65,6 @@
                 .then(function (data) {
                     model.userSession = data.user.session.userSession;
 
-                    yodleeService
-                        .getAccounts(model.cobSession, model.userSession)
-                        .then(function (data) {
-                            model.yodleeAccounts = data.account;
-                        })
-
-                    yodleeService
-                        .getFastLinkToken(model.cobSession, model.userSession)
-                        .then(function (data) {
-                            model.apiToken = data.user.accessTokens[0].value;
-                        })
-                })
-        }
-
-        function deleteYodleeAccount(accountId) {
-            yodleeService
-                .deleteAccount(model.cobSession, model.userSession, accountId)
-                .then(function (data) {
                     yodleeService
                         .getAccounts(model.cobSession, model.userSession)
                         .then(function (data) {

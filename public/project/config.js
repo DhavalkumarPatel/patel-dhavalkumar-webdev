@@ -71,12 +71,20 @@
                     currentUser: checkHH_FM
                 }
             })
+            .when('/balance', {
+                templateUrl: 'views/balance/templates/balance.view.client.html',
+                controller: 'balanceController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkHH_FM
+                }
+            })
             .when('/financialAccount', {
                 templateUrl: 'views/financialAccount/templates/financialAccount-list.view.client.html',
                 controller: 'financialAccountListController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkHH
+                    currentUser: checkHH_FM
                 }
             })
             .when('/financialAccount/new', {
@@ -95,6 +103,46 @@
                     currentUser: checkHH
                 }
             })
+            .when('/financialAccount/:financialAccountId/yodleeTransaction', {
+                templateUrl: 'views/transaction/templates/yodleeTransaction-list.view.client.html',
+                controller: 'yodleeTransactionListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkHH_FM
+                }
+            })
+            .when('/financialAccount/:financialAccountId/yodleeTransaction/:transactionId', {
+                templateUrl: 'views/transaction/templates/yodleeTransaction-detail.view.client.html',
+                controller: 'yodleeTransactionDetailController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkHH_FM
+                }
+            })
+            .when('/financialAccount/:financialAccountId/transaction', {
+                templateUrl: 'views/transaction/templates/transaction-list.view.client.html',
+                controller: 'transactionListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkHH_FM
+                }
+            })
+            .when('/financialAccount/:financialAccountId/transaction/new', {
+                templateUrl: 'views/transaction/templates/transaction-new.view.client.html',
+                controller: 'transactionNewController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkHH_FM
+                }
+            })
+            .when('/financialAccount/:financialAccountId/transaction/:transactionId', {
+                templateUrl: 'views/transaction/templates/transaction-edit.view.client.html',
+                controller: 'transactionEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkHH_FM
+                }
+            })
             .when('/familyMember', {
                 templateUrl: 'views/familyMember/templates/family-member.view.client.html',
                 controller: 'familyMemberController',
@@ -103,9 +151,6 @@
                     currentUser: checkHH_FM
                 }
             });
-
-
-
     }
     
     function checkAdmin(userService, $q, $location) {

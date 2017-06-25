@@ -1,0 +1,102 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="navbar-header wd-margin-sx">
+                    <p class="navbar-text pull-left">
+                        <a href="#!/profile"
+                           class="navbar-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </p>
+                    <a class="navbar-brand">
+                        Balance
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#!/"
+                           class="navbar-link margin-right" title="Home">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+
+                        <a ng-click="model.logout()"
+                           class="navbar-link" title="Logout">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <label>Local Financial Accounts</label>
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-md-4 col-sm-7 col-xs-7">
+                    Account Name
+                </div>
+                <div class="col-md-4 hidden-sm hidden-xs">
+                    Account Number
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-5">
+                    Net Balance
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="financialAccount in model.financialAccounts"
+            class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-sm-7 col-xs-7">
+                    {{financialAccount.accountName}}
+                </div>
+                <div class="col-md-4 hidden-sm hidden-xs">
+                    {{financialAccount.accountNumber}}
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-5 pull-right">
+                    ${{model.map[financialAccount._id]}}
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <label>Financial Accounts Linked from Yodlee</label>
+
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-md-4 col-sm-7 col-xs-7">
+                    Account Name
+                </div>
+                <div class="col-md-4 hidden-sm hidden-xs">
+                    Account Number
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-5">
+                    Net Balance
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="yodleeAccount in model.yodleeAccounts"
+            ng-if="yodleeAccount.CONTAINER!=='reward'"
+            class="list-group-item">
+
+            <div class="row">
+                <div class="col-md-4 col-sm-7 col-xs-7">
+                    {{yodleeAccount.providerName}}
+                </div>
+                <div class="col-md-4 hidden-sm hidden-xs">
+                    {{yodleeAccount.accountNumber}}
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-5">
+                    ${{yodleeAccount.balance.amount}}
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

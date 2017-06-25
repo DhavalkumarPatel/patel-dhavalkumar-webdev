@@ -4,7 +4,7 @@ var financialAccountSchema = mongoose.Schema({
     _user: {type: mongoose.Schema.Types.ObjectId, ref: "OFM_UserModel"},
     accountName: String,
     accountNumber: String,
-    accountType: String,
+    yodlee: Boolean,
     dateCreated: {type: Date, default: Date.now}
 }, {collection: 'OFM_financialAccount'});
 

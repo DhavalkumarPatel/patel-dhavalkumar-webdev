@@ -1,0 +1,131 @@
+User Roles *
+List and describe all the roles in your project. Required roles were anonymous (not logged in), identified (logged in), and admin. Depending on the number of participants in your team, and whether you are undergraduate or graduate, you were required to provide additional roles. Also, you were allowed to replace one user for an API. Specific role/API requirements might apply to you with permission from the instructor. Please use the following username/passwords for the users in different roles: : alice/alice, ROLE2: bob/bob, ROLE3: charlie/charlie, ROLE4: dan/dan, ADMIN: admin/admin
+
+ROLE1) HOUSEHOLD (alice/alice): Household is a boss of a family who can CRUD financial accounts for a family and also can CRUD family member users.
+
+ROLE2) FAMILYMEMBER (bob/bob): Family Member cannot Create/update/delete a financial account of a family or cannot CRUD other family member users, whereas he can see both. Also he can CRUD transactions of a account along with household.
+
+ROLE3) ADMIN (admin/admin): Admin user can manage user and domain objects with their relationships. Admin can CRUD all the users of the system. Admin can also see the relationship of user and financial account and can CRUD a financial account for any user.
+
+ROLE4) ANONYMOUS (not logged in): Anonymous user can see the home page and read the features provided by the website application. He can also see the current number of registered users in the system along with family count.
+
+
+After login as alice/alice, you will be redirected to alice's profile page. 
+
+1) Update alice's profile by clicking on "Update" button.
+
+2) See the list of users, alice is following by clicking on "Users you follow" link.
+	2.1) Clicking on "Users you follow" button, you will be redirected to users list whom Alice is following.
+	2.2) Alice can follow a new user by clicking on "+" button from this page.
+		2.2.1) On Clicking "+" button, you will be redirected to user search page which is loaded with the list of users Alice is not following.
+		2.2.2) You can search the user by his first or last name.
+		2.2.3) You can follow the user by clicking "Follow" button next to user and will redirect back to the user list page which Alice is following.
+	2.3) Alice can unfollow a user by clicking "Unfollow" button next to already following user.
+
+3) See the list of finicial accounts of alice by clicking on "Financial Accounts" link.
+	3.1) Clicking on "Financial Accounts" link, you will be redirected to financial account list page.
+	3.2) On this page you can see two types of transaction: One is configured(created) in local mongo database and one is congigured using Yodlee API.
+		1) Local Financial Accounts
+			3.2.1) You can CRUD local financial account for Alice on this page. All the details and buttons are povided into top table.
+			3.2.2) You can see the list on already added local accounts in financial account list page.
+			3.2.3) On clicking on link on any local financial account, you will be redirected to transaction page of this financial account.
+					3.2.3.1) On Transaction page of any local financial account, you can see all the transactions of that account.
+					3.2.3.2) You can CRUD the transactions here.
+					3.2.3.2) You can search transaction by from date, to date or category.
+					
+		2) Yodlee Financial Account
+			3.2.1) On the below part of financial account page, you can see the financial account configured for Alice from Yodlee API.
+			3.2.2) These are the real accounts, and I have currently configured my Discover & AMEX cards with all test users to test.
+			3.2.3) You can integrate any new real account (e.g. credit card) by clicking on "+" sign, You will be asked to provide credential of financial account during this process.
+			3.2.4) On successull configuration of financial account from yodlee, you will be redirected back to same page and can see the newly configured account. 
+			3.2.5) On Clicking already configured account, you will be redirected to transaction page of this financial account.
+					3.2.3.1) On Transaction page of any yodlee integrated financial account, you can see all the transactions of that account (real transactions from real account).
+					3.2.3.2) You can search transaction by from date, to date or category, this search will again fetches data from real accounts using third party API (Yodlee).
+			3.2.6) You can delete already integrated financial account with yodlee by clicking on cross sign next to financial account.
+	
+4) See the balance of all finicial accounts of alice by clicking on "View Balance" link.
+	4.1) On clicking "View Balance" link, you can see the balance of all the configured accounts of the Alice at one place.
+
+5) See all the family members of alice by clicking on "Family Members" link.
+	5.1) Clicking on "Family Members" link, you will be redirected to the family member page of Alice. 
+	5.2) Household user can CRUD a new family member for his account on this page.
+	5.3) Password for newly created user (FAMILYMEMBER) is same as his username.
+
+6) You can traverse to home page (top-right) and comeback by clicking on profile link from home page.
+
+7) Unregister Alice. (please don't do this as this is a demo purpose user)
+
+8) Logout (top-right) from alice's account.
+
+
+After login as bob/bob, you will be redirected to bob's profile page. 
+
+1) Update bob's profile by clicking on "Update" button.
+
+2) See the list of users, bob is following by clicking on "Users you follow" link.
+	2.1) Clicking on "Users you follow" button, you will be redirected to users list whom bob is following.
+	2.2) bob can follow a new user by clicking on "+" button from this page.
+		2.2.1) On Clicking "+" button, you will be redirected to user search page which is loaded with the list of users bob is not following.
+		2.2.2) You can search the user by his first or last name.
+		2.2.3) You can follow the user by clicking "Follow" button next to user and will redirect back to the user list page which bob is following.
+	2.3) bob can unfollow a user by clicking "Unfollow" button next to already following user.
+
+3) See the list of financial accounts of bob by clicking on "Financial Accounts" link.
+	3.1) Clicking on "Financial Accounts" link, you will be redirected to financial account list page.
+	3.2) On this page you can see two types of accounts: One is configured(created) in local mongo database and one is configured using Yodlee API.
+		1) Local Financial Accounts
+			3.2.1) On the top part of financial account page, you can see the financial account configured for bob in local mongo db.
+			3.2.3) FAMILYMEMBER user can ONLY see the accounts and NO CRUD.
+			3.2.2) You can see the list on already added local accounts in financial account list page.
+			3.2.3) On clicking on link on any local financial account, you will be redirected to transaction page of this financial account.
+					3.2.3.1) On Transaction page of any local financial account, you can see all the transactions of that account.
+					3.2.3.2) You can CRUD the transactions here.
+					3.2.3.2) You can search transaction by from date, to date or category.
+					
+		2) Yodlee Financial Account
+			3.2.1) On the below part of financial account page, you can see the financial account configured for bob from Yodlee API.
+			3.2.2) These are the real accounts, and I have currently configured my Discover & AMEX cards with all test users to test.
+			3.2.3) FAMILYMEMBER user can ONLY see the accounts and NO CRUD.
+			3.2.5) On Clicking already configured account, you will be redirected to transaction page of this financial account.
+					3.2.3.1) On Transaction page of any yodlee integrated financial account, you can see all the transactions of that account (real transactions from real account).
+					3.2.3.2) You can search transaction by from date, to date or category, this search will again fetches data from real accounts using third party API (Yodlee).
+	
+4) See the balance of all financial accounts of bob by clicking on "View Balance" link.
+	4.1) On clicking "View Balance" link, you can see the balance of all the configured accounts of the bob & family at one place.
+
+5) See all the family members of bob by clicking on "Family Members" link.
+	5.1) Clicking on "Family Members" link, you will be redirected to the family member page of bob. 
+	5.2) FAMILYMEMBER user can ONLY see family members for his account on this page.
+	5.3) You can see the public profile of all the family members.
+
+6) You can traverse to home page (top-right) and comeback by clicking on profile link from home page.
+
+7) Unregister bob. (please don't do this as this is a demo purpose user)
+
+8) Logout (top-right) from bob's account.
+
+
+
+
+
+After login as admin/admin, you will be redirected to admin's profile page. 
+
+1) Update admin's profile by clicking on "Update" button.
+
+2) See the list of all the users present in website by clicking on "Manage Users" link.
+	2.1) Clicking on "Manage Users" button, you will be redirected to users list page.
+	2.2) Here you can CRUD the users for the entire website.
+	2.3) Default password for newly created user by Admin is same as username of that user.
+	2.4) Please donot modify the roles of alice & bob as the test data are configured for them.
+
+3) See the list of financial accounts of entire website with User to website relation by clicking on "Manage Financial Accounts" link.
+	3.1) Clicking on "Manage Financial Accounts" link, you will be redirected to financial account page.
+	3.2) Here you can see the relationship between User and Finacial account. You can Create/Update/Delete the finacial account for listed user.
+	3.3) User combo has list of all the household users available in the website.
+	3.3) You can apply CRUD on financial account domain object on this page and also assign it's relationship to User here.
+	
+4) You can traverse to home page (top-right) and comeback by clicking on profile link from home page.
+
+5) Logout (top-right) from bob's account.
+
+

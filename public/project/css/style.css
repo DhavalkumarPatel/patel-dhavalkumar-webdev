@@ -1,3 +1,84 @@
+.img-portfolio {
+    margin-bottom: 30px;
+}
+
+.img-header {
+    margin-bottom: 30px;
+    width: 100%;
+    height: auto;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.sm-margin{
+    margin-top: 15px;
+}
+
+.img-hover:hover {
+    opacity: 0.8;
+}
+
+header.carousel {
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.error-404 {
+    font-size: 100px;
+}
+
+.price {
+    display: block;
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.price sup {
+    top: -20px;
+    left: 2px;
+    font-size: 20px;
+}
+
+.period {
+    display: block;
+    font-style: italic;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}
+
 a.form-control,
 input.form-control,
 textarea.form-control,
@@ -38,6 +119,71 @@ body {
         padding-left: 15px;
         padding-right: 15px;
     }
+}
+
+.image-ds-main {
+    background: url(../images/dspHome.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height:400px;
+}
+
+.image-ds-sm1 {
+    background: url(../images/dsp1.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height:190px;
+}
+
+
+.image-ds-sm2 {
+    background: url(../images/projectHome.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height:190px;
+}
+
+
+.image-ds-sm3 {
+    background: url(../images/projecthome1.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height:190px;
+}
+
+.dsp-neg-margin {
+    margin-top: -10px;
+}
+
+h1.dsp-header {
+    color: white;
+    font-family: Calibri;
+}
+p.dsp-header {
+    color: white;
+    font-family: Calibri;
+}
+
+.image-dsd {
+    background: url(../images/dspd.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height:300px;
 }
 
 .navbar-inverse .navbar-brand {

@@ -18,6 +18,7 @@
         model.logout = logout;
 
         function init() {
+            model.loading=true;
             getTransactions();
         }
         init();
@@ -25,10 +26,13 @@
         function getTransactions() {
             yodleeService
                 .getTransactions(model.financialAccountId, '')
-                .then(renderTransactions);
+                .then(renderTransactions, function (err) {
+                    model.loading=false;
+                });
         }
 
         function renderTransactions(data) {
+            model.loading=false;
             model.transactions = data.transaction;
         }
 
@@ -41,7 +45,7 @@
         }
 
         function searchTransaction(searchObj) {
-
+            model.loading = true;
             var queryParameters = '';
 
             if(searchObj.category !== '0') {
@@ -58,7 +62,9 @@
 
             yodleeService
                 .getTransactions(model.financialAccountId, queryParameters)
-                .then(renderTransactions);
+                .then(renderTransactions, function (err) {
+                    model.loading = false;
+                });
         }
     }
 })();

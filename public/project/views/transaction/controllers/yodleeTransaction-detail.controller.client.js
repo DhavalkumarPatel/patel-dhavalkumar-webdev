@@ -16,6 +16,7 @@
         model.logout = logout;
 
         function init() {
+            model.loading=true;
             getTransaction();
         }
         init();
@@ -23,7 +24,9 @@
         function getTransaction() {
             yodleeService
                 .getTransactions(model.financialAccountId, '')
-                .then(renderTransactions);
+                .then(renderTransactions, function (err) {
+                    model.loading = false;
+                });
         }
 
         function renderTransactions(data) {
@@ -33,6 +36,7 @@
                     break;
                 }
             }
+            model.loading = false;
         }
 
         function logout() {

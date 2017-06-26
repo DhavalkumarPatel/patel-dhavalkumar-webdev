@@ -98,9 +98,14 @@
         <div class="row">
             <div class="col-xs-12 bottom-margin">
                 <a ng-click="(myForm.dateFrom.$invalid || myForm.dateTo.$invalid) ? submitted=true : model.searchTransaction(model.search)">
-                    <span class="btn btn-success btn-block">Search</span>
+                    <span class="btn btn-success btn-block" ng-show="!model.loading">Search</span>
+                    <button class="btn btn-primary btn-block" ng-show="model.loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Searching...</button>
                 </a>
             </div>
+        </div>
+
+        <div ng-show="!model.loading && !model.transactions && !model.transactions.length>0" class="alert alert-info">
+            No Transactions Found.
         </div>
 
         <div ng-show="model.transactions && model.transactions.length>0" class="top-margin">

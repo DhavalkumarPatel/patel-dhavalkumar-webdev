@@ -18,7 +18,7 @@
         model.deleteYodleeAccount = deleteYodleeAccount;
 
         function init() {
-
+            model.loading = true;
             if(currentUser.role === 'FAMILY-MEMBER') {
                 model.parentId = currentUser._houseHoldUser;
             }
@@ -28,7 +28,9 @@
 
             yodleeService
                 .getCOBSession()
-                .then(loadYodleeSession)
+                .then(loadYodleeSession, function (err) {
+                    model.loading = false;
+                })
         }
         init();
 
@@ -48,6 +50,7 @@
                     yodleeService
                         .getAccounts()
                         .then(function (data) {
+                            model.loading=false;
                             model.yodleeAccounts = data.account;
                         })
 
@@ -60,12 +63,14 @@
         }
 
         function deleteYodleeAccount(accountId) {
+            model.loading=true;
             yodleeService
                 .deleteAccount(accountId)
                 .then(function (data) {
                     yodleeService
                         .getAccounts()
                         .then(function (data) {
+                            model.loading=false;
                             model.yodleeAccounts = data.account;
                         })
                 })

@@ -26,11 +26,12 @@
                 .findAllFinancialAccountsForUser(model.parentId)
                 .then(renderFinancialAccounts);
 
-            yodleeService
+            /*yodleeService
                 .getCOBSession()
                 .then(loadYodleeSession, function (err) {
                     model.loading = false;
-                })
+                })*/
+            model.loading = false;
         }
         init();
 

@@ -93,7 +93,7 @@ function loadFastLinkToken(cobSession, userSession) {
         }
     });
 }
-loadCOBSession();
+//loadCOBSession();
 
 function yodleeCallBack(req, res) {
     res.redirect('/project/#!/financialAccount');
@@ -112,7 +112,7 @@ function getFastLinkToken(req, res) {
 }
 
 function getAccounts(req, res) {
-    var headers = {
+    /*var headers = {
         'User-Agent': 'Mozilla/5.0',
         'Content-Type': 'application/json; charset=utf-8',
         'Authorization': 'userSession='+USER_SESSION+', cobSession='+COB_SESSION
@@ -130,10 +130,13 @@ function getAccounts(req, res) {
             res.json(jsonObj);
         }
     });
+    */
+    res.json({});
 }
 
 function deleteAccount(req, res) {
 
+    /*
     var headers = {
         'User-Agent': 'Mozilla/5.0',
         'Content-Type': 'application/json; charset=utf-8',
@@ -151,10 +154,13 @@ function deleteAccount(req, res) {
         }
         res.send(200);
     });
+    */
+    res.send(200);
 }
 
 function getTransactions(req, res) {
 
+    /*
     var param = req.body;
     var headers = {
         'User-Agent': 'Mozilla/5.0',
@@ -173,5 +179,6 @@ function getTransactions(req, res) {
             var jsonObj = JSON.parse(body);
             res.json(jsonObj);
         }
-    });
+    });*/
+    res.json({});
 }
